@@ -66,6 +66,7 @@
           </controllersDirectory>
           <formsDirectory>
             <formFile formName="User"/>
+            <formFile formName="Signup"/>
           </formsDirectory>
           <layoutsDirectory enabled="false">
             <layoutScriptsDirectory enabled="false"/>

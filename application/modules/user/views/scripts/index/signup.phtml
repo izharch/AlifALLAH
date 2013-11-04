@@ -1,0 +1,41 @@
+<div class="login-form span6 offset3 login-box">
+    <form method="post">
+        <div class="row-fluid">
+            <div class="span4">
+                <label class="pull-right"><?php echo $this->form->email->getLabel(); ?></label>
+            </div>
+            <div class="span8">
+                <?php echo $this->form->email; ?>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <label class="pull-right"><?php echo $this->form->username->getLabel(); ?></label>
+            </div>
+            <div class="span8">
+                <?php echo $this->form->username; ?>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <label class="pull-right"><?php echo $this->form->password->getLabel(); ?></label>
+            </div>
+            <div class="span8">
+                <?php echo $this->form->password; ?>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <label class="pull-right"><?php echo $this->form->confirm_password->getLabel(); ?></label>
+            </div>
+            <div class="span8">
+                <?php echo $this->form->confirm_password; ?>
+            </div>
+        </div>
+        <div class="row-fluid margin-top-15">
+            <div class="span4 offset4">
+                <input class="btn btn-primary btn-block" type="submit" value="Signup"/>
+            </div>
+        </div>
+    </form>
+</div>

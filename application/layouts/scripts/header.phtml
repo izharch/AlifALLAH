@@ -28,8 +28,8 @@
             } else if ($this->user()) {
                 $username = $this->user()->username;
             }
-            if(!empty($username)){
-                if($this->user() && $this->user()->username === $username){
+            if (!empty($username)) {
+                if ($this->user() && $this->user()->username === $username) {
                     $userPronoun = 'My';
                 }
             }
@@ -51,6 +51,9 @@
                         </div>
                         <div class="span2">
                             <input type="submit" value="Login" class="btn btn-primary btn-block margin-top-2"/>
+                        </div>
+                        <div class="span2">
+                            <a class="btn btn-success btn-block btn-small margin-top-2" href="<?php echo $this->url(array('module' => 'user', 'action' => 'signup'), NULL, TRUE); ?>">Create Account</a>
                         </div>
                     </div>
                 </form>
@@ -78,7 +81,7 @@
                         <li>
                             <a href="gallary.html"><?php echo $userPronoun; ?> Gallery</a>
                         </li>
-                        <?php if ($this->ownNav === TRUE) { ?>
+                        <?php if ($userPronoun === 'My') { ?>
                             <li>
                                 <a href="<?php echo $this->url(array('module' => 'user', 'controller' => 'index', 'action' => 'logout'), NULL, TRUE); ?>">Logout</a>
                             </li>

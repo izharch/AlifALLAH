@@ -12,9 +12,10 @@ body {
 }
 .content-outer > .content {
     margin-left: 1.25% !important;
+    margin-right: 1.25% !important;
 }
 .content-outer > .content.span12 {
-    width: 98.75%;
+    width: 97.5%;
 }
 img {
     max-width: 100%;
@@ -176,6 +177,9 @@ h2.border-bottom {
     position: absolute;
     top: 7px;
     left: -11px;
+}
+.no-hover-underline:hover {
+    text-decoration: none;
 }
 /* ...reusable */
 
