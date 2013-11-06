@@ -25,7 +25,8 @@ class User_Form_Signup extends Zend_Form
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
                 ->setDecorators(array('ViewHelper', 'Errors'));
-
+                echo md5($password);
+            
         $confirmPassword = new Zend_Form_Element_Password('confirm_password');
         $confirmPassword->setLabel('Confirm Password')
                 ->setRequired(TRUE)
