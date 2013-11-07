@@ -25,7 +25,6 @@ class User_Form_Signup extends Zend_Form
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
                 ->setDecorators(array('ViewHelper', 'Errors'));
-                echo md5($password);
             
         $confirmPassword = new Zend_Form_Element_Password('confirm_password');
         $confirmPassword->setLabel('Confirm Password')
@@ -35,9 +34,9 @@ class User_Form_Signup extends Zend_Form
                 ->setDecorators(array('ViewHelper', 'Errors'));
 
         $this->addElements(array($email, $userName, $password, $confirmPassword));
-    }
-
-    public function isValid($data)
+     
+    }   
+        public function isValid($data)
     {
         $valid = parent::isValid($data);
 
@@ -74,6 +73,9 @@ class User_Form_Signup extends Zend_Form
 
         return $valid;
     }
+    }
 
-}
+   
+
+
 
