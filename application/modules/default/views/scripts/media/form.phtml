@@ -24,6 +24,15 @@
             <label><?php echo $this->form->file->getLabel(); ?></label>
             <?php echo $this->form->file; ?>
             <p><?php echo $this->form->file->getDescription(); ?></p>
+            <?php if ($this->form->file->hasErrors()) { ?>
+                <ul class="errors">
+                    <?php foreach ($this->form->file->getMessages() as $message) { ?>
+                        <li>
+                            <?php echo $message; ?>
+                        </li>
+                    <?php } ?>
+                </ul>
+            <?php } ?>
         </div>
         <?php if (!empty($this->file)) { ?>
             <div class="span4">
@@ -38,6 +47,15 @@
             <?php echo $this->form->thumbnail; ?>
             <p><?php echo $this->form->thumbnail->getDescription(); ?></p>
         </div>
+        <?php if ($this->form->thumbnail->hasErrors()) { ?>
+                <ul class="errors">
+                    <?php foreach ($this->form->thumbnail->getMessages() as $message) { ?>
+                        <li>
+                            <?php echo $message; ?>
+                        </li>
+                    <?php } ?>
+                </ul>
+            <?php } ?>
         <?php if (!empty($this->thumbnail)) { ?>
             <div class="span4">
                 <img class="thumb_100" src="<?php echo $this->getResource($this->thumbnail, 'thumbnails', 'uploads'); ?>" />

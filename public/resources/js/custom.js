@@ -18,6 +18,11 @@ $(function() {
     
     //back button
     initLinkToBack();
+    
+    //like button
+    if(App.userId != null){
+        initLikeButton();
+    }
 });
 
 function setSidebarMinHeight(){
@@ -104,5 +109,39 @@ function initJPlayer(){
 function initLinkToBack(){
     $('.link-to-back').one('click', function(){
         history.back();
+    });
+}
+
+function initLikeButton(){
+    $('.like-button').on('click', function(){
+        var $this = $(this);
+        
+        if($this.hasClass('disabled')){
+            return;
+        }
+        
+        $this.addClass('disabled');
+        
+        var entityId = $this.attr('data-id'),
+        entityType = $this.attr('data-type'),
+        action = $this.hasClass('active') ? 'dislike' : 'like';
+        
+        $.ajax({
+            url     : App.likeUrl,
+            data    : {
+                entity_id   : entityId, 
+                entity_type : entityType, 
+                act      : action, 
+                user_id     : App.userId
+            },
+            success : function(data){
+                data = parseInt(data);
+
+                $this.next('.like-count').html(data);
+                $this.toggleClass('active');
+                $this.find('span').html(action == 'like' ? 'Liked' : 'Like');
+                $this.removeClass('disabled');
+            }
+        });
     });
 }

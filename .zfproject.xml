@@ -42,6 +42,7 @@
             <modelFile modelName="CommonFunctions"/>
             <modelFile modelName="Media"/>
             <modelFile modelName="Library"/>
+            <modelFile modelName="Likes"/>
           </modelsDirectory>
           <servicesDirectory enabled="false"/>
           <viewsDirectory>

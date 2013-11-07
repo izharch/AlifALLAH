@@ -86,7 +86,7 @@ class Default_MediaController extends Zend_Controller_Action
         if ($this->_request->isPost()) {
             $mediaModel->deleteResourceById($id);
 
-            $this->_redirect($this->view->url(array('controller' => 'media'), NULL, TRUE));
+            $this->_redirect($this->view->url(array('controller' => 'media', 'user' => $this->_user->username), NULL, TRUE));
         }
 
         $this->view->media = $media;
@@ -149,7 +149,7 @@ class Default_MediaController extends Zend_Controller_Action
 
                 $mediaModel->save($data);
 
-                $this->_redirect($this->view->url(array('controller' => 'media'), NULL, FALSE));
+                $this->_redirect($this->view->url(array('controller' => 'media', 'user' => $this->_user->username), NULL, TRUE));
             }
         }
 

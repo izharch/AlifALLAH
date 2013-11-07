@@ -1,0 +1,8 @@
+CREATE TABLE `likes` (
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `entity_id` INT(11) NOT NULL,
+  `entity_type` VARCHAR(50) NOT NULL,
+  `user_id` INT(11) NOT NULL,
+  `added_at` DATETIME NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8
