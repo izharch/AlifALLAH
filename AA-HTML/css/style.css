@@ -1,0 +1,22 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+ul, li {
+	list-style: none;
+}
+
+/* reusable... */
+.white-bg {
+	background-color: white;
+}
+.position-absolute {
+	position: absolute;
+}
+.position-relative {
+	position: relative;
+}
+.hidden {
+	display: none;
+}
+/* ...reusable */
