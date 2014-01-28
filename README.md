@@ -2,4 +2,5 @@
 
 - __Technology:__ PHP
 - __Framework:__ Zend Framework 1.12
--__developer__ Izhar chohdry
+- __developer:__ Izhar chohdry
+ 
