@@ -4,4 +4,3 @@
 - __Framework:__ Zend Framework 1.12
 - __Developer:__ Muhammad Izhar
 - __Contributor:__ Muhammad Adeel
-- __new:__ bilal majeed
