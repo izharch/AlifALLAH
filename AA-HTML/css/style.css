@@ -93,3 +93,21 @@ ul, li {
 }
 /* ...sidebar */
 
+/* content... */
+.content {
+    
+}
+
+.content .content-section {
+    
+}
+
+.content .content-section .content-section-header {
+    padding: .5em 1em;
+}
+
+.content .content-section .content-section-content {
+    height: 100%;
+}
+
+/* ...content */
