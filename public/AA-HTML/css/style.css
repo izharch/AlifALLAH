@@ -138,6 +138,7 @@ h2.border-bottom {
 .content .content-section .content-section-content {
     height: 100%;
 }
+
 /* ...content */
 
 /* list item... */
@@ -148,3 +149,13 @@ h2.border-bottom {
     height: 140px;
 }
 /* ...list item */
+
+.search-submit {
+    margin-top:2px;
+    background: #E5E5E5;
+    border: none;
+    height: 24px;
+    width: 25px;
+    margin-left: 0px;
+    
+}
