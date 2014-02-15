@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Alif Allah</title>
+
+        <?php
+        echo $this->headLink()
+                //jQuery
+                ->appendStylesheet($this->baseUrl() . '/resources/css/jquery-ui-1.10.4.custom.min.css')
+                //Bootsrtap
+                //->appendStylesheet($this->baseUrl() . '/resources/css/bootstrap.min.css')
+                ->appendStylesheet($this->baseUrl() . '/resources/css/bootstrap.css')
+                ->appendStylesheet($this->baseUrl() . '/resources/css/bootstrap-theme.min.css')
+                ->appendStylesheet($this->baseUrl() . '/resources/css/bootstrap-responsive.css')
+                //Custom style
+                ->appendStylesheet($this->baseUrl() . '/resources/css/style.css');
+        ?>
+
+        <?php
+        echo $this->headScript()
+                //jQuery
+                ->appendFile($this->baseUrl() . '/resources/js/jquery-1.10.2.min.js')
+                ->appendFile($this->baseUrl() . '/resources/js/jquery-migrate-1.2.1.min.js')
+                ->appendFile($this->baseUrl() . '/resources/js/jquery-ui-1.10.4.custom.min.js')
+                //Bootsrtap
+                ->appendFile($this->baseUrl() . '/resources/js/bootstrap.min.js')
+                //Custom js
+                ->appendFile($this->baseUrl() . '/resources/js/custom.js');
+        ?>
+    </head>
+
+    <body>
+        <!-- Header -->
+        <?php echo $this->partial('header.phtml'); ?>
+        <div class="row-fluid position-relative content-outer">
+            <!-- Sidebar -->
+            <?php
+            $contentClass = 'span12';
+            if ($this->sidebar !== FALSE) {
+                $contentClass = 'span9';
+                echo $this->partial('sidebar.phtml');
+            }
+            ?>
+
+            <!-- Content -->
+            <div class="content <?php echo $contentClass; ?>">
+                <?php echo $this->layout()->content; ?>
+            </div>
+
+            <?php echo $this->partial('footer.phtml'); ?>
+        </div>
+        <div class="footer"></div>
+    </body>
+</html>
