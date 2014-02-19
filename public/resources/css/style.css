@@ -193,3 +193,31 @@ h2.border-bottom {
     
 }
 
+/* ears... */
+.ear {
+    background-color: #DAD4CB;
+    border: 1px solid #BFB7A1;
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 20px;
+    position: relative;
+}
+.ear-top-down {
+    border-radius: 0 0 35px 35px;
+    padding: 3px 50px 3px 30px;
+    border-top: none;
+}
+.ear-top-down:after {
+    position: absolute;
+    background: url(images/ui-icons_ffffff_256x240.png) -64px 0 no-repeat transparent;
+    width: 14px;
+    height: 14px;
+    content: "";
+    top: 5px;
+    right: 16px;
+}
+.ear .ear-content {
+    position: absolute;
+    width: 100%;
+}
+/* ...ears */

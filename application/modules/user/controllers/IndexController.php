@@ -10,6 +10,8 @@ class User_IndexController extends Zend_Controller_Action
 
     public function loginAction()
     {
+        $userRolesModel = new User_Model_UserRoles();
+        
         $form = new User_Form_User();
 
         if ($this->_request->isPost()) {
@@ -30,6 +32,10 @@ class User_IndexController extends Zend_Controller_Action
                     $user = $authAdapter->getResultRowObject();
 
                     unset($user->password);
+                    
+                    //Set user roles
+                    $userRoles = $userRolesModel->getRolesByUserId($user->id);
+                    $user->roles = $userRoles;
 
                     Zend_Auth::getInstance()->getStorage()->write($user);
 

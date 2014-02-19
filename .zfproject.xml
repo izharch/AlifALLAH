@@ -50,6 +50,7 @@
           </layoutsDirectory>
           <modelsDirectory>
             <modelFile modelName="Users"/>
+            <modelFile modelName="UserRoles"/>
           </modelsDirectory>
           <servicesDirectory enabled="false"/>
           <viewsDirectory>
