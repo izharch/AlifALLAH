@@ -1,21 +1,6 @@
 <div class="header">
     <!-- Main nav... -->
     <div class="row-fluid main-nav ui-state-default">
-        <ul class="nav nav-pills pull-left">
-            <li class="ear ear-top-down">
-                Search <span class="ui-icon ui-icon-white ui-icon-carat-1-s ear-pull"></span>
-                <div class="ear-content">
-                    <div class="row-fluid">
-                        <div class="span6">bla bla bla</div>
-                        <div class="span6">bla bla bla</div>
-                    </div>
-                    <div class="row-fluid">
-                        <div class="span6">bla bla bla</div>
-                        <div class="span6">bla bla bla</div>
-                    </div>
-                </div>
-            </li>
-        </ul>
         <ul class="nav nav-pills pull-right">
             <li class="active">
                 <a href="homepage.html">Home</a>
@@ -32,7 +17,97 @@
         </ul>
     </div>
     <!-- ...Main nav -->
-
+    <div class="position-relative">
+        <!-- User curtain... -->
+        <div class="curtain curtain-top-down full-width">
+            <?php if (!$this->user()) { ?>
+                <form method="post" action="<?php echo $this->url(array('module' => 'user', 'controller' => 'index', 'action' => 'login'), NULL, TRUE); ?>">
+                    <div class="row-fluid margin-top-15">
+                        <div class="span1 margin-left-15">
+                            <label>Username</label>
+                        </div>
+                        <div class="span2">
+                            <input type="text" name="username" />
+                        </div>
+                        <div class="span1">
+                            <label>Password</label>
+                        </div>
+                        <div class="span2">
+                            <input type="password" name="password" />
+                        </div>
+                        <div class="span2">
+                            <input type="submit" value="Login" class="btn btn-primary btn-block margin-top-2"/>
+                        </div>
+                    </div>
+                </form>
+            <?php } else { ?>
+                <div class="row-fluid user-nav ui-state-default">
+                    <ul class="nav nav-pills">
+                        <li>
+                            <a href="mediapage.html">My Media</a>
+                        </li>
+                        <li>
+                            <a href="library.html">My Library</a>
+                        </li>
+                        <li>
+                            <a href="gallary.html">My Gallery</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $this->url(array('module' => 'user', 'controller' => 'index', 'action' => 'logout'), NULL, TRUE); ?>">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            <?php } ?>
+            <div class="row-fluid">
+                <div class="span3">
+                    <div class="ribbon curtain-puller cursor-pointer">
+                        <?php echo ($this->user() ? $this->user()->username : 'Login'); ?>
+                        <span>
+                            <span class="ui-icon ui-icon-white ui-icon-carat-1-s inactive-icon"></span>
+                            <span class="ui-icon ui-icon-white ui-icon-carat-1-n active-icon"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ...User curtain -->
+        <!-- Search curtain... -->
+        <?php if (!empty($this->searchForm)) { ?>
+            <div class="curtain curtain-top-down full-width">
+                <div class="row-fluid">
+                    <div class="span6">bla bla bla</div>
+                    <div class="span6">bla bla bla</div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span6">bla bla bla</div>
+                    <div class="span6">bla bla bla</div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span6">bla bla bla</div>
+                    <div class="span6">bla bla bla</div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span6">bla bla bla</div>
+                    <div class="span6">bla bla bla</div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 offset4 center-aligned">
+                        <div class="ribbon pull-none">
+                            <form class="search-widget display-inline">
+                                <input class="no-margin" type="text" placeholder="Search"/>
+                                <input type="submit" value="" class="ui-icon ui-icon-search display-inline"/>
+                            </form>
+                            <span class="curtain-puller cursor-pointer">
+                                <span class="ui-icon ui-icon-white ui-icon-carat-1-s inactive-icon"></span>
+                                <span class="ui-icon ui-icon-white ui-icon-carat-1-n active-icon"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+        <!-- ...Search curtain -->
+    </div>
     <div class="row-fluid main-nav-clearfix"></div>
     <?php if ($this->isHomepage()) { ?>
         <div class="banner"></div>
