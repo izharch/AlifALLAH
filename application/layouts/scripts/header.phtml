@@ -2,11 +2,11 @@
     <!-- Main nav... -->
     <div class="row-fluid main-nav ui-state-default">
         <ul class="nav nav-pills pull-right">
-            <li class="active">
-                <a href="homepage.html">Home</a>
+            <li class="<?php echo $this->navStatus('default/index'); ?>">
+                <a href="<?php echo $this->url(array(), NULL, TRUE); ?>">Home</a>
             </li>
-            <li>
-                <a href="mediapage.html">Media</a>
+            <li class="<?php echo $this->navStatus('default/media'); ?>">
+                <a href="<?php echo $this->url(array('controller' => 'media'), NULL, TRUE); ?>">Media</a>
             </li>
             <li>
                 <a href="library.html">Library</a>
@@ -43,8 +43,8 @@
             <?php } else { ?>
                 <div class="row-fluid user-nav ui-state-default">
                     <ul class="nav nav-pills">
-                        <li>
-                            <a href="mediapage.html">My Media</a>
+                        <li class="<?php echo $this->navStatus('default/media', TRUE); ?>">
+                            <a href="<?php echo $this->url(array('controller' => 'media', 'user' => $this->user()->username), NULL, TRUE); ?>">My Media</a>
                         </li>
                         <li>
                             <a href="library.html">My Library</a>
@@ -60,7 +60,7 @@
             <?php } ?>
             <div class="row-fluid">
                 <div class="span3">
-                    <div class="ribbon curtain-puller cursor-pointer">
+                    <div class="ribbon curtain-puller cursor-pointer <?php echo ($this->userNav === TRUE ? 'glowing' : ''); ?>">
                         <?php echo ($this->user() ? $this->user()->username : 'Login'); ?>
                         <span>
                             <span class="ui-icon ui-icon-white ui-icon-carat-1-s inactive-icon"></span>

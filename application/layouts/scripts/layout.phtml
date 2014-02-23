@@ -13,9 +13,17 @@
                 ->appendStylesheet($this->baseUrl() . '/resources/css/bootstrap.css')
                 ->appendStylesheet($this->baseUrl() . '/resources/css/bootstrap-theme.min.css')
                 ->appendStylesheet($this->baseUrl() . '/resources/css/bootstrap-responsive.css')
+                //jPlayer
+                ->appendStylesheet($this->baseUrl() . '/resources/plugins/jplayer/prettify-jPlayer.css')
+                ->appendStylesheet($this->baseUrl() . '/resources/plugins/jplayer/jplayer.pink.flag.css')
                 //Custom style
                 ->appendStylesheet($this->baseUrl() . '/resources/css/style.css');
         ?>
+
+        <script>
+            var AlifAllah = new Object();
+            AlifAllah.basePath = '<?php echo $this->baseUrl(); ?>';
+        </script>
 
         <?php
         echo $this->headScript()
@@ -25,6 +33,8 @@
                 ->appendFile($this->baseUrl() . '/resources/js/jquery-ui-1.10.4.custom.min.js')
                 //Bootsrtap
                 ->appendFile($this->baseUrl() . '/resources/js/bootstrap.min.js')
+                //jPlayer
+                ->appendFile($this->baseUrl() . '/resources/plugins/jplayer/jquery.jplayer.min.js')
                 //Custom js
                 ->appendFile($this->baseUrl() . '/resources/js/custom.js');
         ?>
@@ -32,14 +42,14 @@
 
     <body>
         <!-- Header -->
-        <?php echo $this->partial('header.phtml'); ?>
+        <?php echo $this->render('header.phtml'); ?>
         <div class="row-fluid position-relative content-outer">
             <!-- Sidebar -->
             <?php
             $contentClass = 'span12';
             if ($this->sidebar !== FALSE) {
                 $contentClass = 'span9';
-                echo $this->partial('sidebar.phtml');
+                echo $this->render('sidebar.phtml');
             }
             ?>
 
@@ -48,7 +58,7 @@
                 <?php echo $this->layout()->content; ?>
             </div>
 
-            <?php echo $this->partial('footer.phtml'); ?>
+            <?php echo $this->render('footer.phtml'); ?>
         </div>
         <div class="footer"></div>
     </body>

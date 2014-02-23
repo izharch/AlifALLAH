@@ -1,0 +1,5 @@
+ALTER TABLE `media`
+ADD COLUMN `thumbnail` VARCHAR(255) NOT NULL AFTER `file`;
+
+ALTER TABLE `library`
+ADD COLUMN `thumbnail` VARCHAR(255) NOT NULL AFTER `file`;
