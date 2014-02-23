@@ -156,19 +156,19 @@ div.jp-type-single  .jp-controls li a{
 }
 
 div.jp-type-single  .jp-play {
-    background: url("jplayer.pink.flag.jpg") 0px -44px no-repeat;
+    background: url("jplayer.pink.flag.jpg") 0px -43px no-repeat;
 }
 
 div.jp-type-single  .jp-play:hover {
-    background: url("jplayer.pink.flag.jpg") -100px -40px no-repeat;
+    background: url("jplayer.pink.flag.jpg") -100px -43px no-repeat;
 }
 
 div.jp-type-single  .jp-pause {
-    background: url("jplayer.pink.flag.jpg") 0px -120px no-repeat;
+    background: url("jplayer.pink.flag.jpg") 0px -123px no-repeat;
 }
 
 div.jp-type-single  .jp-pause:hover {
-    background: url("jplayer.pink.flag.jpg") -100px -120px no-repeat;
+    background: url("jplayer.pink.flag.jpg") -100px -123px no-repeat;
 }
 
 /* The right border is normally in the ul background image. */
@@ -178,11 +178,11 @@ div.jp-audio-stream .jp-pause {
 }
 
 div.jp-type-single  .jp-stop {
-    background: url("jplayer.pink.flag.jpg") 0px -80px no-repeat;
+    background: url("jplayer.pink.flag.jpg") 0px -83px no-repeat;
 }
 
 div.jp-type-single  .jp-stop:hover {
-    background: url("jplayer.pink.flag.jpg") -100px -80px no-repeat;
+    background: url("jplayer.pink.flag.jpg") -100px -83px no-repeat;
 }
 
 /* @end */

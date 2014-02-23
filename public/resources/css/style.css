@@ -137,6 +137,11 @@ h2.border-bottom {
 .btn-small {
     padding: 2px 5px;
 }
+.btn-transparent,
+.btn-transparent:hover,
+.btn-transparent:active {
+    background-image: none;
+}
 /* ...reusable */
 
 /* main-nav... */
@@ -151,6 +156,8 @@ h2.border-bottom {
     padding: 10px 15px;
     font-size: 16px;
     line-height: 20px;
+    border-radius: 0 !important;
+    background-color: transparent;
 }
 .header .main-nav li.active a,
 .header .user-nav li.active a {
@@ -160,6 +167,15 @@ h2.border-bottom {
 }
 .header .main-nav-clearfix {
     height: 42px;
+}
+.header .user-nav .dropdown-toggle {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.header .user-nav .dropdown-menu a {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: transparent !important;
 }
 /* ...main-nav */
 
