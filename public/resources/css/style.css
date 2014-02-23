@@ -45,6 +45,12 @@ ul.errors {
     margin-left: 0;
     margin-top: -8px;
 }
+input[type=file] + ul.errors {
+    margin-top: 2px;
+}
+ul.errors + p {
+    margin-top: -10px;
+}
 .row-fluid [class*="span"] {
     min-height: 0;
 }
@@ -141,6 +147,16 @@ h2.border-bottom {
 .btn-transparent:hover,
 .btn-transparent:active {
     background-image: none;
+}
+.btn-input {
+    padding: 6px;
+    width: 220px !important;
+}
+.thumb_100 {
+    max-width: 100px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
 }
 /* ...reusable */
 
@@ -274,7 +290,25 @@ h2.border-bottom {
     line-height: 20px;
 }
 .curtain:not(.open) .ribbon.glowing {
+    -webkit-animation: glowing 1s ease-in-out 0s infinite;
+    -moz-animation: glowing 1s ease-in-out 0s infinite;
+    -o-animation: glowing 1s ease-in-out 0s infinite;
     animation: glowing 1s ease-in-out 0s infinite;
+}
+@-webkit-keyframes glowing {
+    0% {background-color: #DAD4CB;}
+25% {background-color: #E9E9E9}
+75% {background-color: #DAD4CB;}
+}
+@-moz-keyframes glowing {
+    0% {background-color: #DAD4CB;}
+25% {background-color: #E9E9E9}
+75% {background-color: #DAD4CB;}
+}
+@-o-keyframes glowing {
+    0% {background-color: #DAD4CB;}
+25% {background-color: #E9E9E9}
+75% {background-color: #DAD4CB;}
 }
 @keyframes glowing {
     0% {background-color: #DAD4CB;}
@@ -325,3 +359,9 @@ h2.border-bottom {
 .content .list-item .thumb .thumb {
     height: 140px;
 }
+
+/* tumbleweed... */
+.tumbleweed {
+
+}
+/* ...tumbleweed */

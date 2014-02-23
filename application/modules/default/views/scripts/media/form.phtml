@@ -1,0 +1,53 @@
+<form method="post" enctype="multipart/form-data">
+    <div class="row-fluid">
+        <div class="span4">
+            <label><?php echo $this->form->name->getLabel(); ?></label>
+            <?php echo $this->form->name; ?>
+        </div>
+        <div class="span4 offset1">
+            <label><?php echo $this->form->type->getLabel(); ?></label>
+            <?php echo $this->form->type; ?>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <label><?php echo $this->form->artist->getLabel(); ?></label>
+            <?php echo $this->form->artist; ?>
+        </div>
+        <div class="span4 offset1">
+            <label><?php echo $this->form->share_status->getLabel(); ?></label>
+            <?php echo $this->form->share_status; ?>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <label><?php echo $this->form->file->getLabel(); ?></label>
+            <?php echo $this->form->file; ?>
+            <p><?php echo $this->form->file->getDescription(); ?></p>
+        </div>
+        <?php if (!empty($this->file)) { ?>
+            <div class="span4">
+                <p>&nbsp;</p>
+                <a href="<?php echo $this->getResource($this->file, 'media', 'uploads'); ?>"><i class="icon-download"></i> Download old file</a>
+            </div>
+        <?php } ?>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <label><?php echo $this->form->thumbnail->getLabel(); ?></label>
+            <?php echo $this->form->thumbnail; ?>
+            <p><?php echo $this->form->thumbnail->getDescription(); ?></p>
+        </div>
+        <?php if (!empty($this->thumbnail)) { ?>
+            <div class="span4">
+                <img class="thumb_100" src="<?php echo $this->getResource($this->thumbnail, 'thumbnails', 'uploads'); ?>" />
+            </div>
+        <?php } ?>
+    </div>
+    <div class="row-fluid">&nbsp;</div>
+    <div class="row-fluid">
+        <div class="span3">
+            <input class="btn btn-primary btn-block btn-input" type="submit" value="Save"/>
+        </div>
+    </div>
+</form>

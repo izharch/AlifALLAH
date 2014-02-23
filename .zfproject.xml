@@ -18,7 +18,10 @@
           <layoutScriptFile layoutName="layout"/>
         </layoutScriptsDirectory>
       </layoutsDirectory>
-      <modelsDirectory/>
+      <modelsDirectory>
+        <modelFile modelName="Abstract"/>
+        <modelFile modelName="Common"/>
+      </modelsDirectory>
       <modulesDirectory>
         <moduleDirectory moduleName="default">
           <configsDirectory enabled="false"/>

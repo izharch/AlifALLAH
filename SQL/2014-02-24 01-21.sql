@@ -1,0 +1,8 @@
+ALTER TABLE `media`
+ADD COLUMN `added_at` DATETIME DEFAULT NULL AFTER `added_by`;
+
+ALTER TABLE `library`
+ADD COLUMN `added_at` DATETIME DEFAULT NULL AFTER `added_by`;
+
+ALTER TABLE `gallery`
+ADD COLUMN `added_at` DATETIME DEFAULT NULL AFTER `added_by`;
