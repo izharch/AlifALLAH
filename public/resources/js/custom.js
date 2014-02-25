@@ -15,6 +15,9 @@ $(function() {
     
     //jPlayer
     initJPlayer();
+    
+    //back button
+    initLinkToBack();
 });
 
 function setSidebarMinHeight(){
@@ -90,10 +93,16 @@ function initJPlayer(){
                 var media = {};
                 media[player.attr('extension')] = player.attr('media');
                 player.jPlayer( "setMedia", media);
-                /*$(this).jPlayer("setMedia", {
+            /*$(this).jPlayer("setMedia", {
                     mp3:"http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3"
                 });*/
             }
         });
+    });
+}
+
+function initLinkToBack(){
+    $('.link-to-back').one('click', function(){
+        history.back();
     });
 }

@@ -5,6 +5,12 @@ class Default_Model_Media extends Application_Model_Abstract
 
     protected $_name = 'media';
 
+    /* See Application_Model_Abstract::$uploadedFiles */
+    protected $uploadedFiles = array(
+        'file' => 'uploads/media/',
+        'thumbnail' => 'uploads/thumbnails/',
+    );
+
     public function getPaginatorAdapter($username = NULL)
     {
         $select = $this->select()

@@ -12,12 +12,26 @@
                     </div>
                     <div class="row-fluid margin-top-10">
                         <button class="btn btn-small"><i class="icon-heart"></i> Like</button>
-                        <button class="btn btn-small"><i class="icon-share"></i> Share</button>
+                        <span class="like-count">0</span>
                     </div>
                 </div>
                 <div class="span10">
-                    <?php if ($item->added_by == $this->user()->id) { ?>
-                        <a class="btn btn-small pull-right" href="<?php echo $this->url(array('controller' => 'media', 'action' => 'edit', 'id' => $item->id), NULL, TRUE); ?>">Edit</a>
+                    <?php if ($this->user() && $item->added_by == $this->user()->id) { ?>
+                        <div class="btn-group pull-right">
+                            <button data-toggle="dropdown" class="btn btn-small dropdown-toggle">Action <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'edit', 'id' => $item->id), NULL, TRUE); ?>">Edit</a>
+                                </li>
+                                <li>
+                                    <a href="#">Share</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'delete', 'id' => $item->id), NULL, TRUE); ?>">Delete</a>
+                                </li>
+                            </ul>
+                        </div>
                     <?php } ?>
                     <p class="no-margin-bottom"><?php echo $item->username; ?></p>
                     <h4 class="no-margin"><?php echo $item->name; ?></h4>

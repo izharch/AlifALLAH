@@ -27,8 +27,8 @@ class Default_MediaController extends Zend_Controller_Action
                 $this->view->ownNav = TRUE;
             }
         }
-        
-        if(in_array($actionName, array('add','edit'))){
+
+        if (in_array($actionName, array('add', 'edit'))) {
             $this->view->userNav = TRUE;
             $this->view->ownNav = TRUE;
         }
@@ -54,7 +54,42 @@ class Default_MediaController extends Zend_Controller_Action
 
     public function editAction()
     {
+        $id = $this->_request->getParam('id');
+        if (empty($id)) {
+            $this->view->error = 400;
+            return;
+        }
         $this->_saveMedia();
+    }
+
+    public function deleteAction()
+    {
+        $id = $this->_request->getParam('id');
+
+        if (empty($id)) {
+            $this->view->error = 400;
+            return;
+        }
+
+        $mediaModel = new Default_Model_Media();
+
+        $media = $mediaModel->getRecordById($id);
+
+        if (!isset($media->id)) {
+            $this->view->error = 404;
+            return;
+        } else if ($media->added_by != $this->_user->id) {
+            $this->view->error = 403;
+            return;
+        }
+
+        if ($this->_request->isPost()) {
+            $mediaModel->deleteResourceById($id);
+
+            $this->_redirect($this->view->url(array('controller' => 'media'), NULL, TRUE));
+        }
+
+        $this->view->media = $media;
     }
 
     private function _saveMedia()
@@ -66,11 +101,15 @@ class Default_MediaController extends Zend_Controller_Action
 
         //Update...
         $id = $this->_request->getParam('id');
+
         if (!empty($id)) {
             $media = $mediaModel->getRecordById($id);
+
             if (!isset($media->id)) {
+                $this->view->error = 404;
                 return;
             } else if ($media->added_by != $this->_user->id) {
+                $this->view->error = 403;
                 return;
             }
 
