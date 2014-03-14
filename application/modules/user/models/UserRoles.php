@@ -1,6 +1,6 @@
 <?php
 
-class User_Model_UserRoles extends Zend_Db_Table_Abstract
+class User_Model_UserRoles extends Application_Model_Abstract
 {
 
     protected $_name = 'user_roles';

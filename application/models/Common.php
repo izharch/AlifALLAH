@@ -54,5 +54,60 @@ class Application_Model_Common
         }
     }
 
+    /**
+     * Returns an alphanumeric string of random characters of specified length
+     * 
+     * @param int $length the length of string
+     * 
+     * @return string the random string
+     */
+    public function getRandomString($length = 10)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        return $randomString;
+    }
+
+    public function sendSignupConfirmationEmail($email, $confirmationToken)
+    {
+        $config = Zend_Registry::get('config');
+        if ($config['send_mail'] == 0) {
+            return;
+        }
+
+        $view = new Zend_View();
+        $confirmationLink = $view->url(array('module' => 'user', 'action' => 'activate', 'email' => $email, 'token' => $confirmationToken), NULL, TRUE);
+
+        //From email
+        $fromEmail = 'noreply@' . $_SERVER['HTTP_HOST'];
+
+        $content = <<<TEXT
+Hi there and Asalamu alaikum!
+
+Thank you for signing up on our portal. You are just one step ahead from being a
+junior member of our website. Please visit the link below to activate your
+account.
+
+
+TEXT;
+        $contentHTML = nl2br($content);
+
+        $content .= $confirmationLink;
+        $contentHTML .= "<a href='$confirmationLink' target='_blank'>$confirmationLink</a>";
+
+        $mail = new Zend_Mail();
+        $mail->setBodyHtml($contentHTML)
+                ->setBodyText($content)
+                ->setFrom($fromEmail, 'Alif 4 Allah')
+                ->setSubject('Signup Confirmation')
+                ->addTo($email)
+                ->send();
+    }
+
 }
 
