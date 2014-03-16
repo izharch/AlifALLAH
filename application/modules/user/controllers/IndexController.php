@@ -54,6 +54,8 @@ class User_IndexController extends Zend_Controller_Action
                 $formData = $form->getValues();
 
                 unset($formData['confirm_password']);
+
+                $formData['password'] = md5($formData['password']);
                 $formData['added_at'] = date('Y-m-d h:i:s');
                 $formData['confirmation_token'] = $commonFunctions->getRandomString(32);
 
