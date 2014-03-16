@@ -1,0 +1,55 @@
+<form method="post" enctype="multipart/form-data">
+    <div class="row-fluid">
+        <div class="span4">
+            <label><?php echo $this->form->name->getLable(); ?> </label>
+            <?php echo $this->form->name; ?>
+        </div>
+        <div class="span4 offset1">
+            <lable><?php echo $this->form->type->getLable(); ?></lable>
+            <?php echo $this->form->type; ?>
+        </div>
+    </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <lable><?php echo $this->form->author->getLable(); ?></lable>
+                <?php echo $this->form->author; ?>
+            </div>
+            <div class="span4 offset1">
+                <lable><?php echo $this->form->share_status->getLable(); ?></lable>
+                <?php echo $this->form->share_status; ?>
+            </div>
+        </div>
+        
+        <div class="row-fluid">
+            <div class="span4">
+                <label><?php echo $this->form->file->getLable(); ?></label>
+                <?php echo $this->form->file; ?>
+                <p><?php echo $this->form->file->getDescription; ?></p>
+            </div>
+            <?php if(!empty($this->file)){ ?>
+            <div class="span4">
+                <p>&nbsp;</p>
+                <a href="<?php echo $this->getResource($this->file, 'library', 'uploads'); ?>"><i class="icon-download"></i></a>
+            </div>
+                <?php } ?>
+        </div>
+        
+        <div class="row-fluid">
+            <div class="span4">
+                <label><?php echo $this->form->thumbnail->getLable(); ?></label>
+                <?php echo $this->form->thumbnail; ?>
+                <p><?php echo $this->form->thumbnail->getDescription; ?></p>
+            </div>
+            <?php if(!empty($this->thumbnail)) { ?>
+            <div class="span4">
+                <img src="<?php echo $this->getResource($this->thumbnail, 'thumbnails', 'uploads'); ?>" />
+            </div>
+            <?php } ?>
+        </div>
+        <div class="row-fluid">&nbsp;</div>
+        <div class="row-fluid">
+            <div class="span3">
+                <input class="btn btn-block btn-primary btn-input" type="submit" value="Upload" />
+            </div>
+        </div>
+</form>
