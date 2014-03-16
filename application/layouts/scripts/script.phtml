@@ -1,0 +1,5 @@
+<script>
+    App = new Object();
+    App.userId = <?php echo ($this->user() ? $this->user()->id : 'null'); ?>;
+    App.likeUrl = '<?php echo $this->url(array('action' => 'like'), NULL, TRUE); ?>';
+</script>

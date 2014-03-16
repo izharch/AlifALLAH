@@ -17,6 +17,9 @@ body {
 .content-outer > .content.span12 {
     width: 97.5%;
 }
+.content-outer > .content.span9 {
+    width: 74.0957%;
+}
 img {
     max-width: 100%;
     height: auto;
