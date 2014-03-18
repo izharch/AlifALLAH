@@ -66,10 +66,10 @@
                                 <?php if ($this->userNav !== TRUE || $this->ownNav === TRUE) { ?>
                                     <a data-toggle="dropdown" class="btn btn-transparent dropdown-toggle"><span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'add'), NULL, TRUE); ?>">+ New</a></li>
+                                        <li><a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'add'), NULL, TRUE); ?>"><i class="icon-plus-sign"></i> New</a></li>
                                         <?php if ($this->hasRole('admin')) { ?>
                                             <li class="divider"></li>
-                                            <li><a href="#">Pending</a></li>
+                                            <li><a href="<?php echo $this->url(array('controller' => 'media', 'status' => 'pending'), NULL, TRUE); ?>"><i class="icon-time"></i> Pending</a></li>
                                         <?php } ?>
                                     </ul>
                                 <?php } ?>

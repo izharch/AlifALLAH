@@ -37,10 +37,18 @@ class Default_MediaController extends Zend_Controller_Action
     public function indexAction()
     {
         $username = $this->_request->getParam('user', NULL);
+        $status = $this->_request->getParam('status', NULL);
+
+        if (empty($username) && empty($status)) {
+            //Show only shared items
+            $status = 'shared';
+        } else if ($status == 'pending') {
+            $this->view->pending = TRUE;
+        }
 
         $mediaModel = new Default_Model_Media();
 
-        $paginator = new Zend_Paginator($mediaModel->getPaginatorAdapter($username));
+        $paginator = new Zend_Paginator($mediaModel->getPaginatorAdapter($username, $status));
         $paginator->setItemCountPerPage(10);
         $paginator->setPageRange(10);
 
