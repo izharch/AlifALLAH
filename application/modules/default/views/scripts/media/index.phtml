@@ -13,19 +13,23 @@
                     <div class="row-fluid margin-top-10">
                         <?php $this->likeButton($item); ?>
                     </div>
+                    <div class="row-fluid margin-top-5">
+                        <?php $this->shareButton($item); ?>
+                    </div>
                 </div>
                 <div class="span10">
-                    <?php if ($this->user() && $item->added_by == $this->user()->id) { ?>
+                    <?php if ($this->isAdmin() || $this->user() && $item->added_by == $this->user()->id) { ?>
                         <div class="btn-group pull-right">
                             <button data-toggle="dropdown" class="btn btn-small dropdown-toggle">Action <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'edit', 'id' => $item->id), NULL, TRUE); ?>">Edit</a>
                                 </li>
-                                <li>
-                                    <a href="#">Share</a>
-                                </li>
-                                <li class="divider"></li>
+                                <?php
+                                if($this->pending === TRUE){
+                                    $this->shareOption($item);
+                                }
+                                ?>
                                 <li>
                                     <a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'delete', 'id' => $item->id), NULL, TRUE); ?>">Delete</a>
                                 </li>

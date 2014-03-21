@@ -23,6 +23,16 @@ $(function() {
     if(App.userId != null){
         initLikeButton();
     }
+    
+    //share button
+    if(App.userId != null){
+        initShareButton();
+    }
+    
+    //approve button
+    if(App.userId != null){
+        initApproveButton();
+    }
 });
 
 function setSidebarMinHeight(){
@@ -131,8 +141,7 @@ function initLikeButton(){
             data    : {
                 entity_id   : entityId, 
                 entity_type : entityType, 
-                act      : action, 
-                user_id     : App.userId
+                act         : action
             },
             success : function(data){
                 data = parseInt(data);
@@ -141,6 +150,90 @@ function initLikeButton(){
                 $this.toggleClass('active');
                 $this.find('span').html(action == 'like' ? 'Liked' : 'Like');
                 $this.removeClass('disabled');
+            }
+        });
+    });
+}
+
+function initShareButton(){
+    $('.share-button').on('click', function(){
+        var $this = $(this);
+        
+        if($this.hasClass('disabled')){
+            return;
+        }
+        
+        $this.addClass('disabled');
+        
+        var entityId = $this.attr('data-id'),
+        entityType = $this.attr('data-type'),
+        action = $this.hasClass('active') ? 'unshare' : 'share';
+        
+        $.ajax({
+            url     : App.shareUrl,
+            data    : {
+                entity_id   : entityId, 
+                entity_type : entityType, 
+                act         : action
+            },
+            success : function(shareStatus){
+                var shared = false,
+                disabled = false;
+                switch(shareStatus){
+                    case 'not_shared':
+                        shared = false;
+                        disabled = false;
+                        break;
+                    case 'pending':
+                    case 'shared':
+                        shared = true;
+                        disabled = false;
+                        break;
+                    case 'disapproved':
+                        shared = false;
+                        disabled = true;
+                        break;
+                    default:
+                        shared = false;
+                        disabled = true;
+                }
+
+                if(shared){
+                    $this.addClass('active');
+                }else{
+                    $this.removeClass('active');
+                }
+                
+                $this.find('span').html(shared ? 'Shared' : 'Share');
+                if(!disabled){
+                    $this.removeClass('disabled');
+                }
+            }
+        });
+    });
+}
+
+function initApproveButton(){
+    $('.approve-button').on('click', function(){
+        var $this = $(this);
+        
+        var approveButtons = $this.parent().parent().find('.approve-button');
+        
+        approveButtons.addClass('disabled');
+        
+        var entityId = $this.attr('data-id'),
+        entityType = $this.attr('data-type'),
+        action = $this.hasClass('disapprove') ? 'disapprove' : 'approve';
+        
+        $.ajax({
+            url     : App.shareUrl,
+            data    : {
+                entity_id   : entityId, 
+                entity_type : entityType, 
+                act         : action
+            },
+            success : function(shareStatus){
+                window.location.reload();
             }
         });
     });

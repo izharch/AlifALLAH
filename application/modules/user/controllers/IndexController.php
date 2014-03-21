@@ -5,7 +5,30 @@ class User_IndexController extends Zend_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
+        $this->_user = Zend_Auth::getInstance()->getIdentity();
+
+        $actionName = $this->_request->getActionName();
+
+        if (!isset($this->_user->id) && in_array($actionName, array('index', 'logout'))) {
+            $this->_redirect($this->view->url(array('module' => 'user', 'action' => 'login'), NULL, TRUE));
+        } else if (isset($this->_user->id) && in_array($actionName, array('login', 'signup', 'activate'))) {
+            $this->_redirect();
+        }
+        
+        if($actionName == 'index' && !$this->view->isAdmin()){
+            $this->_redirect();
+        }
+    }
+
+    public function indexAction()
+    {
+        $userModel = new User_Model_User();
+
+        $paginator = new Zend_Paginator($userModel->getPaginatorAdapter());
+        $paginator->setItemCountPerPage(10);
+        $paginator->setPageRange(10);
+
+        $this->view->paginator = $paginator;
     }
 
     public function loginAction()
@@ -52,7 +75,6 @@ class User_IndexController extends Zend_Controller_Action
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $formData = $form->getValues();
-
 
                 unset($formData['confirm_password']);
 

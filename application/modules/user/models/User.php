@@ -99,8 +99,18 @@ class User_Model_User extends Application_Model_Abstract
 
         return (isset($result->id) ? FALSE : TRUE);
     }
+    public function getPaginatorAdapter($username = NULL, $sharedStatus = NULL)
+    {
+        $select = $this->select()
+                ->setIntegrityCheck(FALSE)
+                ->from(array('u' => $this->_name))
+                ->joinLeft(array('l' => 'likes'), 'l.entity_added_by = u.id', array('likes' => new Zend_Db_Expr('COUNT(l.id)')))
+                ->joinLeft(array('ur' => 'user_roles'), 'ur.user_id = u.id', array())
+                ->joinLeft(array('r' => 'roles'), 'r.id = ur.role_id', array('roles' => new Zend_Db_Expr('GROUP_CONCAT(r.role_name SEPARATOR ", ")')))
+                ->group('u.id')
+                ->order('u.added_at DESC');
+
+        return new Zend_Paginator_Adapter_DbTableSelect($select);
+    }
+
 }
-
-    
-
-

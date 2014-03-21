@@ -1,0 +1,54 @@
+<?php if ($this->paginator->count()) { ?>
+    <table class="table table-bordered margin-top-15 width-10p">
+        <tr class="success">
+            <td class="center-aligned">Super</td>
+        </tr>
+        <tr class="info">
+            <td class="center-aligned">Admin</td>
+        </tr>
+        <tr class="warning">
+            <td class="center-aligned">Senior</td>
+        </tr>
+    </table>
+    <table class="table table-bordered margin-top-15">
+        <thead class="ui-state-default">
+            <tr>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Added at</th>
+                <th>Status</th>
+                <th>Likes</th>
+                <th>Roles</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->paginator as $item) { ?>
+                <?php
+                $colorClass = '';
+                if (strpos($item->roles, 'senior') !== FALSE) {
+                    $colorClass = 'warning';
+                }
+                if (strpos($item->roles, 'admin') !== FALSE) {
+                    $colorClass = 'info';
+                }
+                if (strpos($item->roles, 'super') !== FALSE) {
+                    $colorClass = 'success';
+                }
+                ?>
+                <tr class="<?php echo $colorClass; ?>">
+                    <td><?php echo $item->email; ?></td>
+                    <td><?php echo $item->username; ?></td>
+                    <td><?php echo $item->added_at; ?></td>
+                    <td><?php echo $item->status; ?></td>
+                    <td><?php echo $item->likes; ?></td>
+                    <td><?php echo $item->roles; ?></td>
+                    <td></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <?php echo $this->paginationControl($this->paginator); ?>
+<?php } else { ?>
+    <div class="tumbleweed"></div>
+<?php } ?>
