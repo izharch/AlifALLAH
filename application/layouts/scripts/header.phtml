@@ -80,8 +80,21 @@
                                 <?php } ?>
                             </div>
                         </li>
-                        <li>
-                            <a href="library.html"><?php echo $userPronoun; ?> Library</a>
+                        
+                         <li class="<?php echo $this->navStatus('default/library', TRUE); ?>">
+                            <div class="btn-group">
+                                <a class="btn btn-transparent" href="<?php echo $this->url(array('controller' => 'library', 'user' => $username), NULL, TRUE); ?>"><?php echo $userPronoun; ?> Library</a>
+                                <?php if ($this->userNav !== TRUE || $this->ownNav === TRUE) { ?>
+                                    <a data-toggle="dropdown" class="btn btn-transparent dropdown-toggle"><span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="<?php echo $this->url(array('controller' => 'library', 'action' => 'add'), NULL, TRUE); ?>">+ New</a></li>
+                                        <?php if ($this->hasRole('admin')) { ?>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Pending</a></li>
+                                        <?php } ?>
+                                    </ul>
+                                <?php } ?>
+                            </div>
                         </li>
                         <li>
                             <a href="gallary.html"><?php echo $userPronoun; ?> Gallery</a>

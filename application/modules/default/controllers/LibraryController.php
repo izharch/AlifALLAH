@@ -96,10 +96,11 @@ class Default_LibraryController extends Zend_Controller_Action
 
     private function _saveLibrary()
     {
-        $libraryModel = new Defaul_Model_Library();
+        $libraryModel = new Default_Model_Library();
+        
         $commonModel = new Application_Model_Common();
 
-        $form = new Default_form_Library();
+        $form = new Default_Form_Library();
 
         //update
         $id = $this->_request->getParam('id');
@@ -146,13 +147,13 @@ class Default_LibraryController extends Zend_Controller_Action
                 //update
                 //Added / Updated data
                 $data['added_at'] = date('y-m-d h-i-s');
-                $data['added_by'] = $this_user->id;
+                $data['added_by'] = $this->_user->id;
                 
                 $data['share_status'] = $commonModel->resolveShareStatus($data['share_status']);
                 
-                $libraryModel = save($data);
+                $libraryModel->save($data);
                 
-                $this->redirect($this->view->url(array('controller' => 'library'),NULL,FALSE));
+                $this->_redirect($this->view->url(array('controller' => 'library'),NULL,FALSE));
                 
             }
        

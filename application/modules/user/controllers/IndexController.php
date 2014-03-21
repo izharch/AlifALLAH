@@ -82,12 +82,11 @@ class User_IndexController extends Zend_Controller_Action
             if ($form->isValid($this->_request->getPost())) {
                 $formData = $form->getValues();
 
-                $formData->password['md5'];
-
                 unset($formData['confirm_password']);
 
                 $formData['password'] = md5($formData['password']);
                 $formData['added_at'] = date('Y-m-d h:i:s');
+
                 $formData['confirmation_token'] = $commonFunctions->getRandomString(32);
 
                 $userModel->save($formData);
@@ -122,7 +121,6 @@ class User_IndexController extends Zend_Controller_Action
                 'id' => $user->id,
                 'status' => 'active',
             );
-
             $userModel->save($userData);
 
             $userModel->processLoginData($user, FALSE);
@@ -131,7 +129,6 @@ class User_IndexController extends Zend_Controller_Action
         } else {
             $this->view->errorMessage = 'Invalid verification URL';
         }
-
         $this->view->sidebar = FALSE;
     }
 
