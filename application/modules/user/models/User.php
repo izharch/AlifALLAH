@@ -17,8 +17,7 @@ class User_Model_User extends Application_Model_Abstract
      * 
      * @return mixed the id of the user or FALSE
      */
-   
- public function verifyActivationToken($email, $token)
+    public function verifyActivationToken($email, $token)
     {
         $user = $this->fetchRow(
                 array(
@@ -30,7 +29,7 @@ class User_Model_User extends Application_Model_Abstract
 
         return (isset($user->id) ? $user : FALSE);
     }
-    
+
     public function processLoginData($data, $credentialTreatment = TRUE)
     {
         $status = FALSE;
@@ -47,13 +46,12 @@ class User_Model_User extends Application_Model_Abstract
             $authAdapter->setCredentialTreatment('MD5(?)');
         }
 
-       $authResult = $authAdapter->authenticate();
+        $authResult = $authAdapter->authenticate();
 
         if ($authResult->isValid()) {
-        $user = $authAdapter->getResultRowObject();
-        
-        
-        if ($user->status == 'active') {
+            $user = $authAdapter->getResultRowObject();
+
+            if ($user->status == 'active') {
                 unset($user->password);
 
                 //Set user roles
@@ -75,18 +73,14 @@ class User_Model_User extends Application_Model_Abstract
         } else {
             $message = 'Invalid credentials.';
         }
-            
-            
-        
-            
 
         return array(
             'status' => $status,
             'message' => $message,
         );
     }
-    
-     public function verifyUniqueEmail($email)
+
+    public function verifyUniqueEmail($email)
     {
         $result = $this->fetchRow(array('email = ?' => $email));
 
@@ -99,6 +93,7 @@ class User_Model_User extends Application_Model_Abstract
 
         return (isset($result->id) ? FALSE : TRUE);
     }
+
     public function getPaginatorAdapter($username = NULL, $sharedStatus = NULL)
     {
         $select = $this->select()
