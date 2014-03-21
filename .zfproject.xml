@@ -29,28 +29,24 @@
             <controllerFile controllerName="Media">
               <actionMethod actionName="index"/>
             </controllerFile>
-            <controllerFile controllerName="Library">
-              <actionMethod actionName="index"/>
-            </controllerFile>
           </controllersDirectory>
           <formsDirectory>
             <formFile formName="Media"/>
-            <formFile formName="Library"/>
           </formsDirectory>
           <layoutsDirectory enabled="false"/>
           <modelsDirectory>
             <modelFile modelName="CommonFunctions"/>
             <modelFile modelName="Media"/>
+<<<<<<< HEAD
             <modelFile modelName="Library"/>
             <modelFile modelName="Likes"/>
+=======
+>>>>>>> parent of 126bbac... Iibrarycontroller added.
           </modelsDirectory>
           <servicesDirectory enabled="false"/>
           <viewsDirectory>
             <viewScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Media">
-                <viewScriptFile forActionName="index"/>
-              </viewControllerScriptsDirectory>
-              <viewControllerScriptsDirectory forControllerName="Library">
                 <viewScriptFile forActionName="index"/>
               </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
