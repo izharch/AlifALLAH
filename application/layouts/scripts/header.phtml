@@ -14,6 +14,11 @@
             <li>
                 <a href="gallary.html">Gallery</a>
             </li>
+            <?php if ($this->isAdmin()) { ?>
+                <li class="<?php echo $this->navStatus('user/index'); ?>">
+                    <a href="<?php echo $this->url(array('module' => 'user'), NULL, TRUE); ?>">Users</a>
+                </li>
+            <?php } ?>
         </ul>
     </div>
     <!-- ...Main nav -->

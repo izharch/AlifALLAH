@@ -37,9 +37,15 @@ class Default_IndexController extends Zend_Controller_Action
         $liked = $likesModel->isLiked($entityId, $entityType, $userId);
 
         if ($act == 'like' && !$liked) {
+            $model = 'Default_Model_' . ucfirst($entityType);
+            $model = new $model;
+
+            $entity = $model->getRecordById($entityId);
+
             $likeData = array(
                 'entity_id' => $entityId,
                 'entity_type' => $entityType,
+                'entity_added_by' => $entity->added_by,
                 'user_id' => $userId,
                 'added_at' => date('Y-m-d h:i:s'),
             );
@@ -67,7 +73,6 @@ class Default_IndexController extends Zend_Controller_Action
 
         $model = 'Default_Model_' . ucfirst($entityType);
         $model = new $model;
-        $model = new Default_Model_Media();
 
         $entity = $model->getRecordById($entityId);
 
