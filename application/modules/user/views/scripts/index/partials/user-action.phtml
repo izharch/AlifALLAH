@@ -1,0 +1,44 @@
+<?php
+$item = $this->item;
+$roles = $this->roles;
+
+$actionsAllowed =
+        //item is not super user
+        strpos($item->roles, 'super') === FALSE
+        //either item is not admin or logged in user is super
+        && (strpos($item->roles, 'admin') === FALSE || $this->isAdmin(TRUE));
+
+if ($actionsAllowed) {
+    ?>
+    <div class="btn-group">
+        <?php
+        $status = $item->status == 'active' ? 'deactivate' : 'activate';
+        ?>
+        <a href="<?php echo $this->url(array('module' => 'user', 'action' => 'edit', 'id' => $item->id, 'status' => $status), NULL, TRUE); ?>" class="btn"><?php echo ucfirst($status); ?></a>
+        <?php
+        $itemRoles = explode(', ', $item->roles);
+
+        $assignedRoles = array_intersect($roles, $itemRoles);
+        $unassignedRoles = array_diff($roles, $itemRoles);
+        ?>
+        <a class="btn dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <?php if (!empty($unassignedRoles)) { ?>
+                <?php foreach ($unassignedRoles as $role) { ?>
+                    <li><a href="<?php echo $this->url(array('module' => 'user', 'action' => 'edit', 'id' => $item->id, 'addrole' => $role), NULL, TRUE); ?>">Add role <b><?php echo $role; ?></b></a></li>
+                <?php } ?>
+                <li class="divider"></li>
+            <?php } ?>
+            <?php if (!empty($assignedRoles)) { ?>
+                <?php foreach ($assignedRoles as $role) { ?>
+                    <li><a href="<?php echo $this->url(array('module' => 'user', 'action' => 'edit', 'id' => $item->id, 'removerole' => $role), NULL, TRUE); ?>">Remove role <b><?php echo $role; ?></b></a></li>
+                <?php } ?>
+                <li class="divider"></li>
+            <?php } ?>
+            <li><a href="<?php echo $this->url(array('module' => 'user', 'action' => 'delete', 'id' => $item->id), NULL, TRUE); ?>">Delete</a></li>
+        </ul>
+    </div>
+    <?php
+}

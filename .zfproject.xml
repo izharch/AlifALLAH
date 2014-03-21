@@ -75,6 +75,7 @@
           <modelsDirectory>
             <modelFile modelName="Users"/>
             <modelFile modelName="UserRoles"/>
+            <modelFile modelName="Roles"/>
           </modelsDirectory>
           <servicesDirectory enabled="false"/>
           <viewsDirectory>

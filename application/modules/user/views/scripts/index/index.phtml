@@ -43,7 +43,9 @@
                     <td><?php echo $item->status; ?></td>
                     <td><?php echo $item->likes; ?></td>
                     <td><?php echo $item->roles; ?></td>
-                    <td></td>
+                    <td>
+                        <?php echo $this->partial('index/partials/user-action.phtml', array('item' => $item, 'roles' => $this->roles)); ?>
+                    </td>
                 </tr>
             <?php } ?>
         </tbody>

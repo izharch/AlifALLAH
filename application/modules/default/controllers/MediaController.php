@@ -51,6 +51,7 @@ class Default_MediaController extends Zend_Controller_Action
         $paginator = new Zend_Paginator($mediaModel->getPaginatorAdapter($username, $status));
         $paginator->setItemCountPerPage(10);
         $paginator->setPageRange(10);
+        $paginator->setCurrentPageNumber($this->getParam('page'));
 
         $this->view->paginator = $paginator;
     }

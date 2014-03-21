@@ -46,6 +46,7 @@ class Default_LibraryController extends Zend_Controller_Action
         $paginator = new Zend_Paginator($librarymodel->getPaginatorAdapter($username));
         $paginator->setItemCountPerPage(10);
         $paginator->setPageRange(10);
+        $paginator->setCurrentPageNumber($this->getParam('page'));
 
         $this->view->paginator = $paginator;
     }

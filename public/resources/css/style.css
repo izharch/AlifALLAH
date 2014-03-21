@@ -58,7 +58,9 @@ ul.errors + p {
 .row-fluid [class*="span"] {
     min-height: 0;
 }
-.btn-mini .caret, .btn-small .caret {
+.btn .caret,
+.btn-mini .caret,
+.btn-small .caret {
     margin-bottom: 8px;
 }
 /* ...general */

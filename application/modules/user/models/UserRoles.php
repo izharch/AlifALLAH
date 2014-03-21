@@ -26,5 +26,36 @@ class User_Model_UserRoles extends Application_Model_Abstract
         return $this->getAdapter()->fetchCol($select);
     }
 
+    public function addRole($userId, $roleName)
+    {
+        $rolesModel = new User_Model_Roles();
+        $roleId = $rolesModel->getRoleIdByName($roleName);
+
+        $existing = $this->fetchRow(array(
+            'user_id = ?' => $userId,
+            'role_id = ?' => $roleId,
+                ));
+
+        if ($existing) {
+            return $existing->id;
+        } else {
+            return $this->insert(array(
+                        'user_id' => $userId,
+                        'role_id' => $roleId,
+                    ));
+        }
+    }
+
+    public function removeRole($userId, $roleName)
+    {
+        $rolesModel = new User_Model_Roles();
+        $roleId = $rolesModel->getRoleIdByName($roleName);
+
+        return $this->delete(array(
+                    'user_id = ?' => $userId,
+                    'role_id = ?' => $roleId,
+                ));
+    }
+
 }
 

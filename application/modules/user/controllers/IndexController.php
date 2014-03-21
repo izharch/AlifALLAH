@@ -14,8 +14,8 @@ class User_IndexController extends Zend_Controller_Action
         } else if (isset($this->_user->id) && in_array($actionName, array('login', 'signup', 'activate'))) {
             $this->_redirect();
         }
-        
-        if($actionName == 'index' && !$this->view->isAdmin()){
+
+        if (in_array($actionName, array('index', 'edit')) && !$this->view->isAdmin()) {
             $this->_redirect();
         }
     }
@@ -23,12 +23,18 @@ class User_IndexController extends Zend_Controller_Action
     public function indexAction()
     {
         $userModel = new User_Model_User();
+        $rolesModel = new User_Model_Roles();
+
+        $roles = $rolesModel->getRoleNames();
+
 
         $paginator = new Zend_Paginator($userModel->getPaginatorAdapter());
         $paginator->setItemCountPerPage(10);
         $paginator->setPageRange(10);
+        $paginator->setCurrentPageNumber($this->getParam('page'));
 
         $this->view->paginator = $paginator;
+        $this->view->roles = $roles;
     }
 
     public function loginAction()
@@ -127,6 +133,66 @@ class User_IndexController extends Zend_Controller_Action
         }
 
         $this->view->sidebar = FALSE;
+    }
+
+    public function editAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(TRUE);
+
+        $id = $this->_request->getParam('id');
+        $status = $this->_request->getParam('status');
+        $addRole = $this->_request->getParam('addrole');
+        $removeRole = $this->_request->getParam('removerole');
+
+        $referer = $this->_request->getHeader('referer');
+        if (empty($referer)) {
+            $referer = $this->view->url(array('module' => 'user'), NULL, TRUE);
+        }
+
+        $userModel = new User_Model_User();
+        $userRolesModel = new User_Model_UserRoles();
+
+        $user = $userModel->getRecordById($id);
+        if (!isset($user->id)) {
+            $this->_redirect($referer);
+        }
+
+        $userRoles = $userRolesModel->getRolesByUserId($id);
+
+        $actionsAllowed =
+                //user is not super user
+                !in_array('super', $userRoles)
+                //either user is not admin or logged in user is super
+                && (!in_array('admin', $userRoles) || $this->view->isAdmin(TRUE));
+        if (!$actionsAllowed) {
+            $this->_redirect($referer);
+        }
+
+        if (!empty($status) && in_array($status, array('activate', 'deactivate'))) {
+            $status = $status == 'activate' ? 'active' : 'blocked';
+
+            $data = array(
+                'status' => $status,
+                'id' => $id,
+            );
+
+            $userModel->save($data);
+        }
+
+        if (!empty($addRole) || !empty($removeRole)) {
+            $rolesModel = new User_Model_Roles();
+
+            $roles = $rolesModel->getRoleNames(TRUE);
+
+            if (!empty($addRole) && in_array($addRole, $roles)) {
+                $userRolesModel->addRole($id, $addRole);
+            }
+            if (!empty($removeRole) && in_array($removeRole, $roles)) {
+                $userRolesModel->removeRole($id, $removeRole);
+            }
+        }
+
+        $this->_redirect($referer);
     }
 
 }
