@@ -11,7 +11,7 @@ class Default_Model_Library extends Application_Model_Abstract
         'thumbnail' => 'uploads/thumbnails/',
     );
 
-    public function getPaginatorAdapter($username = NULL)
+    public function getPaginatorAdapter($username = NULL, $sharedStatus = NULL)
     { 
         $likeCols = array('likes' => new Zend_Db_Expr('COUNT(l.id)'));
 
@@ -22,14 +22,17 @@ class Default_Model_Library extends Application_Model_Abstract
 
         $select = $this->select()
                 ->setIntegrityCheck(FALSE)
-                ->from(array('m' => $this->_name))
-                ->join(array('u' => 'user'), 'm.added_by = u.id', 'username')
-                ->order('m.added_at DESC');
+                ->from(array('lb' => $this->_name))
+                ->join(array('u' => 'user'), 'lb.added_by = u.id', 'username')
+                ->joinLeft(array('l' => 'likes'), 'lb.id = l.entity_id AND l.entity_type = "library"', $likeCols)
+                ->group('lb.id')
+                ->order('lb.added_at DESC');
 
         if ($username != NULL) {
             $select->where('u.username = ?', $username);
-        } else {
-            $select->where('m.share_status = "shared"');
+        }
+        if (!empty($sharedStatus)) {
+            $select->where('lb.share_status = ?', $sharedStatus);
         }
 
         return new Zend_Paginator_Adapter_DbTableSelect($select);

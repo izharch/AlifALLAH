@@ -72,7 +72,7 @@
                                     <a data-toggle="dropdown" class="btn btn-transparent dropdown-toggle"><span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'add'), NULL, TRUE); ?>"><i class="icon-plus-sign"></i> New</a></li>
-                                        <?php if ($this->hasRole('admin')) { ?>
+                                        <?php if ($this->isAdmin()) { ?>
                                             <li class="divider"></li>
                                             <li><a href="<?php echo $this->url(array('controller' => 'media', 'status' => 'pending'), NULL, TRUE); ?>"><i class="icon-time"></i> Pending</a></li>
                                         <?php } ?>
@@ -80,17 +80,16 @@
                                 <?php } ?>
                             </div>
                         </li>
-                        
-                         <li class="<?php echo $this->navStatus('default/library', TRUE); ?>">
+                        <li class="<?php echo $this->navStatus('default/library', TRUE); ?>">
                             <div class="btn-group">
                                 <a class="btn btn-transparent" href="<?php echo $this->url(array('controller' => 'library', 'user' => $username), NULL, TRUE); ?>"><?php echo $userPronoun; ?> Library</a>
                                 <?php if ($this->userNav !== TRUE || $this->ownNav === TRUE) { ?>
                                     <a data-toggle="dropdown" class="btn btn-transparent dropdown-toggle"><span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="<?php echo $this->url(array('controller' => 'library', 'action' => 'add'), NULL, TRUE); ?>">+ New</a></li>
-                                        <?php if ($this->hasRole('admin')) { ?>
+                                        <?php if ($this->isAdmin()) { ?>
                                             <li class="divider"></li>
-                                            <li><a href="#">Pending</a></li>
+                                            <li><a href="<?php echo $this->url(array('controller' => 'library', 'status' => 'pending'), NULL, TRUE); ?>">Pending</a></li>
                                         <?php } ?>
                                     </ul>
                                 <?php } ?>

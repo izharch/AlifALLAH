@@ -63,6 +63,9 @@ ul.errors + p {
 .btn-small .caret {
     margin-bottom: 8px;
 }
+.nav .dropdown-toggle .caret {
+    margin-bottom: 0;
+}
 /* ...general */
 
 /* reusable... */

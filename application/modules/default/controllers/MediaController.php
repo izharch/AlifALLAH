@@ -151,7 +151,7 @@ class Default_MediaController extends Zend_Controller_Action
                 }
                 //...Update
                 //Added / updated date
-                $data['added_at'] = date('Y-m-d h:i:s');
+                $data['added_at'] = date('Y-m-d H:i:s');
                 $data['added_by'] = $this->_user->id;
 
                 $data['share_status'] = $commonModel->resolveShareStatus($data['share_status']);

@@ -1,9 +1,5 @@
 <?php
 
-/*
-  @author ezee
- */
-
 class Default_LibraryController extends Zend_Controller_Action
 {
 
@@ -13,37 +9,46 @@ class Default_LibraryController extends Zend_Controller_Action
     {
         $this->_user = Zend_Auth::getInstance()->getIdentity();
 
-        $actionname = $this->_request->getActionName();
+        $actionName = $this->_request->getActionName();
 
-        if (!isset($this->_user->id) && in_array($actionname, array('add', 'edit', 'delete'))) {
+        if (!isset($this->_user->id) && in_array($actionName, array('add', 'edit', 'delete'))) {
             $this->_redirect($this->view->url(array('module' => 'user', 'action' => 'login'), NULL, TRUE));
         }
+
         //Send nav selection information to view
         $username = $this->_request->getParam('user', NULL);
         if ($username != NULL) {
-
+            //Some user's nav
             $this->view->userNav = TRUE;
             $this->view->username = $username;
 
             if (isset($this->_user->username) && $this->_user->username === $username) {
-
-                $this->view->ownNave = TRUE;
+                //Logged in user's nav
+                $this->view->ownNav = TRUE;
             }
         }
-        if (in_array($actionname, array('add', 'edit'))) {
 
+        if (in_array($actionName, array('add', 'edit'))) {
             $this->view->userNav = TRUE;
-            $this->view->ownNave = TRUE;
+            $this->view->ownNav = TRUE;
         }
     }
 
     public function indexAction()
     {
         $username = $this->_request->getParam('user', NULL);
+        $status = $this->_request->getParam('status', NULL);
 
-        $librarymodel = new Default_Model_Library();
+        if (empty($username) && empty($status)) {
+            //Show only shared items
+            $status = 'shared';
+        } else if ($status == 'pending') {
+            $this->view->pending = TRUE;
+        }
 
-        $paginator = new Zend_Paginator($librarymodel->getPaginatorAdapter($username));
+        $libraryModel = new Default_Model_Library();
+
+        $paginator = new Zend_Paginator($libraryModel->getPaginatorAdapter($username, $status));
         $paginator->setItemCountPerPage(10);
         $paginator->setPageRange(10);
         $paginator->setCurrentPageNumber($this->getParam('page'));
@@ -53,16 +58,14 @@ class Default_LibraryController extends Zend_Controller_Action
 
     public function addAction()
     {
-
         $this->_saveLibrary();
     }
 
     public function editAction()
     {
-
         $id = $this->_request->getParam('id');
         if (empty($id)) {
-            $this->view->error = 404;
+            $this->view->error = 400;
             return;
         }
         $this->_saveLibrary();
@@ -71,38 +74,41 @@ class Default_LibraryController extends Zend_Controller_Action
     public function deleteAction()
     {
         $id = $this->_request->getParam('id');
+
         if (empty($id)) {
             $this->view->error = 400;
             return;
         }
 
         $libraryModel = new Default_Model_Library();
+
         $library = $libraryModel->getRecordById($id);
 
-        if (!isset($library->$id)) {
+        if (!isset($library->id)) {
             $this->view->error = 404;
             return;
-        } elseif ($library->added_by != $this->$user->id) {
+        } elseif ($library->added_by != $this->_user->id) {
             $this->view->error = 403;
             return;
         }
-        if ($this->_request->ispost()) {
+
+        if ($this->_request->isPost()) {
             $libraryModel->deleteResourceById($id);
 
-            $this->redirect($this->view->url(array('controller' => 'Library'), NULL, TRUE));
+            $this->_redirect($this->view->url(array('controller' => 'library', 'user' => $this->_user->username), NULL, TRUE));
         }
+
         $this->view->library = $library;
     }
 
     private function _saveLibrary()
     {
         $libraryModel = new Default_Model_Library();
-        
         $commonModel = new Application_Model_Common();
 
         $form = new Default_Form_Library();
 
-        //update
+        //Update...
         $id = $this->_request->getParam('id');
 
         if (!empty($id)) {
@@ -111,20 +117,19 @@ class Default_LibraryController extends Zend_Controller_Action
             if (!isset($library->id)) {
                 $this->view->error = 404;
                 return;
-            } elseif ($library->added_by != $this->_user->id) {
+            } else if ($library->added_by != $this->_user->id) {
                 $this->view->error = 403;
                 return;
             }
 
-            //populate form
-
+            //Populate form
             $form->populate($library->toArray());
 
             $this->view->file = $library->file;
             $this->view->thumbnail = $library->thumbnail;
         }
+        //...Update
 
-        //update
         if ($this->_request->isPost()) {
             //add rename filters
             $commonModel->addRenameFilter($form->file);
@@ -133,8 +138,9 @@ class Default_LibraryController extends Zend_Controller_Action
             if ($form->isvalid($this->_request->getPost())) {
                 $data = $form->getValues();
 
-                //update
+                //Update...
                 if (!empty($id)) {
+                    $data['id'] = $id;
                     //If files are not uploaded, don't overwrite existing records in db
                     if (empty($data['file'])) {
                         unset($data['file']);
@@ -143,22 +149,20 @@ class Default_LibraryController extends Zend_Controller_Action
                         unset($data['thumbnail']);
                     }
                 }
-                
-                //update
-                //Added / Updated data
-                $data['added_at'] = date('y-m-d h-i-s');
+                //...Update
+                //Added / updated data
+                $data['added_at'] = date('Y-m-d H:i:s');
                 $data['added_by'] = $this->_user->id;
-                
+
                 $data['share_status'] = $commonModel->resolveShareStatus($data['share_status']);
-                
+
                 $libraryModel->save($data);
-                
-                $this->_redirect($this->view->url(array('controller' => 'library'),NULL,FALSE));
-                
+
+                $this->_redirect($this->view->url(array('controller' => 'library', 'user' => $this->_user->username), NULL, FALSE));
             }
-       
-            }
-       $this->view->form = $form; 
+        }
+
+        $this->view->form = $form;
     }
 
 }
