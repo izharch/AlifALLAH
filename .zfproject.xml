@@ -37,11 +37,8 @@
           <modelsDirectory>
             <modelFile modelName="CommonFunctions"/>
             <modelFile modelName="Media"/>
-<<<<<<< HEAD
             <modelFile modelName="Library"/>
             <modelFile modelName="Likes"/>
-=======
->>>>>>> parent of 126bbac... Iibrarycontroller added.
           </modelsDirectory>
           <servicesDirectory enabled="false"/>
           <viewsDirectory>
