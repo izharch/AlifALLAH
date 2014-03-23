@@ -29,9 +29,13 @@
             <controllerFile controllerName="Media">
               <actionMethod actionName="index"/>
             </controllerFile>
+            <controllerFile controllerName="Radio">
+              <actionMethod actionName="index"/>
+            </controllerFile>
           </controllersDirectory>
           <formsDirectory>
             <formFile formName="Media"/>
+            <formFile formName="Radio"/>
           </formsDirectory>
           <layoutsDirectory enabled="false"/>
           <modelsDirectory>
@@ -39,11 +43,15 @@
             <modelFile modelName="Media"/>
             <modelFile modelName="Library"/>
             <modelFile modelName="Likes"/>
+            <modelFile modelName="Radio"/>
           </modelsDirectory>
           <servicesDirectory enabled="false"/>
           <viewsDirectory>
             <viewScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Media">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Radio">
                 <viewScriptFile forActionName="index"/>
               </viewControllerScriptsDirectory>
             </viewScriptsDirectory>

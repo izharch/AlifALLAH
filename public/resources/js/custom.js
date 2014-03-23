@@ -14,7 +14,12 @@ $(function() {
     initCurtains();
     
     //jPlayer
-    initJPlayer();
+    if($('.jp-jplayer').length > 0){
+        initJPlayer();
+    }
+    
+    //jRadio
+    initJRadio();
     
     //back button
     initLinkToBack();
@@ -107,12 +112,59 @@ function initJPlayer(){
                 var player = $(this);
                 var media = {};
                 media[player.attr('extension')] = player.attr('media');
+                console.log('-----------------------------------------------------------------------------',media);
                 player.jPlayer( "setMedia", media);
-            /*$(this).jPlayer("setMedia", {
-                    mp3:"http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3"
-                });*/
             }
         });
+    });
+}
+
+function initJRadio(){
+    var swfPath = AlifAllah.basePath + '/resources/plugins/jplayer';
+    $('.jp-jradio').each(function(){
+        var player = $(this),
+        playerId = player.attr('id'),
+        extension = player.attr('extension'),
+        ancestor = player.attr('ancestor');
+
+        $('#'+playerId).jPlayer({
+            swfPath: swfPath,
+            solution: 'html, flash',
+            supplied: extension,
+            preload: 'metadata',
+            volume: 0.8,
+            muted: false,
+            backgroundColor: 'transparent',
+            cssSelectorAncestor: ancestor,
+            cssSelector: {
+                play: '.jp-play',
+                pause: '.jp-pause',
+                gui: '.jp-gui'
+            },
+            errorAlerts: true,
+            warningAlerts: true,
+            ready: function () {
+                var player = $(this);
+                var media = {};
+                media[player.attr('extension')] = player.attr('media');
+                player.jPlayer('setMedia', media);
+            }
+        });
+    });
+    
+    $('.jp-jradio-media').on('click', function(){
+        var source = $(this);
+        var player = $('.jp-jradio');
+        
+        var isPaused = player.data().jPlayer.status.paused;
+        
+        var media = {};
+        media[source.attr('extension')] = source.attr('media');
+        player.jPlayer('setMedia', media);
+        
+        if(!isPaused){
+            player.jPlayer('play');
+        }
     });
 }
 

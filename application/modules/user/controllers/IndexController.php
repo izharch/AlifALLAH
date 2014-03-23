@@ -3,6 +3,8 @@
 class User_IndexController extends Zend_Controller_Action
 {
 
+    private $_user;
+
     public function init()
     {
         $this->_user = Zend_Auth::getInstance()->getIdentity();

@@ -66,6 +66,10 @@ ul.errors + p {
 .nav .dropdown-toggle .caret {
     margin-bottom: 0;
 }
+.radio-toggle .dropdown-toggle {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
 /* ...general */
 
 /* reusable... */
@@ -212,6 +216,16 @@ h2.border-bottom {
     border-radius: 0 !important;
     background-color: transparent;
 }
+.header .main-nav li a.btn,
+.header .user-nav li a.btn {
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
+.header .main-nav li a.dropdown-toggle,
+.header .user-nav li a.dropdown-toggle {
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
 .header .main-nav li.active a,
 .header .user-nav li.active a {
     background-color: rgba(0,0,0,0.2);
@@ -221,11 +235,8 @@ h2.border-bottom {
 .header .main-nav-clearfix {
     height: 42px;
 }
-.header .user-nav .dropdown-toggle {
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-.header .user-nav .dropdown-menu a {
+.header .main-nav .dropdown-menu a,
+.header .user-nav .dropdown-menu a{
     padding-top: 0;
     padding-bottom: 0;
     background-color: transparent !important;

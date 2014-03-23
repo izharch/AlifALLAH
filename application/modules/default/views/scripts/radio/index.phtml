@@ -1,0 +1,40 @@
+<a class="btn margin-top-15" href="<?php echo $this->url(array('controller' => 'radio', 'action' => 'add'), NULL, TRUE); ?>"><i class="icon-plus-sign"></i> New</a>
+<?php if ($this->paginator->count()) { ?>
+    <table class="table table-bordered margin-top-15">
+        <thead class="ui-state-default">
+            <tr>
+                <th>Title</th>
+                <th>Source</th>
+                <th>Extension</th>
+                <th>Status</th>
+                <th>Added at</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->paginator as $item) { ?>
+                <tr>
+                    <td><?php echo $item->title; ?></td>
+                    <td><a href="<?php echo $item->source; ?>"><?php echo $item->source; ?></a></td>
+                    <td><?php echo $item->extension; ?></td>
+                    <td><?php echo $item->status; ?></td>
+                    <td><?php echo $item->added_at; ?></td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn" href="<?php echo $this->url(array('controller' => 'radio', 'action' => 'edit', 'id' => $item->id), NULL, TRUE); ?>">Edit</a>
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="<?php echo $this->url(array('controller' => 'radio', 'action' => 'delete', 'id' => $item->id)); ?>">Delete</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <?php echo $this->paginationControl($this->paginator); ?>
+<?php } else { ?>
+    <div class="tumbleweed"></div>
+<?php } ?>
