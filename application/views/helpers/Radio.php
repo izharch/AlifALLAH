@@ -9,27 +9,29 @@ class Application_View_Helper_Radio extends Zend_View_Helper_Abstract
 
         $channels = $radioModel->getActiveChannels();
 
-        $default = isset($channels[0]) ? $channels[0]['source'] : FALSE;
+        $default = $channels->count() ? $channels[0]['source'] : FALSE;
         ?>
         <div class="btn-group radio-toggle">
             <?php if ($default) { ?>
                 <div id="jquery_jplayer_radio" class="jp-jradio" ancestor="#jp_container_radio" extension="mp3" media="<?php echo $default; ?>"></div>
                 <div id="jp_container_radio" class="jp-radio jp-gui display-inline">
-                    <a href="javascript:;" class="btn btn-transparent cursor-pointer jp-play" tabindex="1">play</a>
-                    <a href="javascript:;" class="btn btn-transparent cursor-pointer jp-pause" tabindex="1">pause</a>
+                    <a class="btn btn-transparent cursor-pointer jp-play" title="Play Radio"><img src="<?php echo $this->view->getResource('radio-paused.png'); ?>"/></a>
+                    <a class="btn btn-transparent cursor-pointer jp-pause" title="Pause Radio"><img src="<?php echo $this->view->getResource('radio-playing.png'); ?>"/></a>
                 </div>
             <?php } else { ?>
-                <a class="btn btn-transparent cursor-pointer disabled">Radio</a>
+                <a class="btn btn-transparent cursor-pointer jp-play" title="Radio Unavailable"><img src="<?php echo $this->view->getResource('radio-unavailable.png'); ?>"/></a>
             <?php } ?>
             <a data-toggle="dropdown" class="btn btn-transparent dropdown-toggle"><span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <?php if ($channels->count()) { ?>
+                <?php if ($default) { ?>
                     <?php foreach ($channels as $channel) { ?>
                         <li><a class="jp-jradio-media cursor-pointer" extension="mp3" media="<?php echo $channel['source']; ?>"><?php echo $channel['title']; ?></a></li>
                     <?php } ?>
                 <?php } ?>
                 <?php if ($this->view->isAdmin()) { ?>
-                    <li class="divider"></li>
+                    <?php if ($default) { ?>
+                        <li class="divider"></li>
+                    <?php } ?>
                     <li><a href="<?php echo $this->view->url(array('controller' => 'radio'), NULL, TRUE); ?>"><i class="icon-cog"></i> Manage</a></li>
                 <?php } ?>
             </ul>

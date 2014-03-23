@@ -70,6 +70,15 @@ ul.errors + p {
     padding-left: 8px !important;
     padding-right: 8px !important;
 }
+.radio-toggle .jp-play,
+.radio-toggle .jp-pause {
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+}
+.radio-toggle .jp-play img,
+.radio-toggle .jp-pause img {
+    
+}
 /* ...general */
 
 /* reusable... */
