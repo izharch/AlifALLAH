@@ -127,6 +127,9 @@ ul.errors + p {
 .margin-bottom-2 {
     margin-bottom: 2px;
 }
+.margin-bottom-15 {
+    margin-bottom: 15px;
+}
 .margin-top-5{
     margin-top: 5px;
 }
@@ -331,6 +334,7 @@ h2.border-bottom {
 .curtain {
     position: fixed;
     background-color: #DAD4CB;
+    border-bottom: 1px solid #BFB7A1;
     z-index: 1;
 }
 .curtain.open {
@@ -347,30 +351,30 @@ h2.border-bottom {
     line-height: 20px;
 }
 .curtain:not(.open) .ribbon.glowing {
-    -webkit-animation: glowing 1s ease-in-out 0s infinite;
-    -moz-animation: glowing 1s ease-in-out 0s infinite;
-    -o-animation: glowing 1s ease-in-out 0s infinite;
-    animation: glowing 1s ease-in-out 0s infinite;
+    -webkit-animation: glowing 2s ease-in-out 0s infinite;
+    -moz-animation: glowing 2s ease-in-out 0s infinite;
+    -o-animation: glowing 2s ease-in-out 0s infinite;
+    animation: glowing 2s ease-in-out 0s infinite;
 }
 @-webkit-keyframes glowing {
     0% {background-color: #DAD4CB;}
-25% {background-color: #E9E9E9}
-75% {background-color: #DAD4CB;}
+12% {background-color: #E9E9E9}
+25% {background-color: #DAD4CB;}
 }
 @-moz-keyframes glowing {
     0% {background-color: #DAD4CB;}
-25% {background-color: #E9E9E9}
-75% {background-color: #DAD4CB;}
+12% {background-color: #E9E9E9}
+25% {background-color: #DAD4CB;}
 }
 @-o-keyframes glowing {
     0% {background-color: #DAD4CB;}
-25% {background-color: #E9E9E9}
-75% {background-color: #DAD4CB;}
+12% {background-color: #E9E9E9}
+25% {background-color: #DAD4CB;}
 }
 @keyframes glowing {
     0% {background-color: #DAD4CB;}
-25% {background-color: #E9E9E9}
-75% {background-color: #DAD4CB;}
+12% {background-color: #E9E9E9}
+25% {background-color: #DAD4CB;}
 }
 .curtain-top-down .ribbon {
     border-radius: 0 0 35px 35px;

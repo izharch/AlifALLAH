@@ -12,7 +12,9 @@
         </controllerFile>
         <controllerFile controllerName="Error"/>
       </controllersDirectory>
-      <formsDirectory enabled="false"/>
+      <formsDirectory>
+        <formFile formName="MediaSearch"/>
+      </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
           <layoutScriptFile layoutName="layout"/>
@@ -36,6 +38,8 @@
           <formsDirectory>
             <formFile formName="Media"/>
             <formFile formName="Radio"/>
+            <formFile formName="MediaSearch"/>
+            <formFile formName="AbstractSearch"/>
           </formsDirectory>
           <layoutsDirectory enabled="false"/>
           <modelsDirectory>
