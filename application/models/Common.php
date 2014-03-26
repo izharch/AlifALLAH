@@ -109,5 +109,20 @@ TEXT;
                 ->send();
     }
 
+    public function getMostLiked($limit = 5)
+    {
+        $mediaModel = new Default_Model_Media();
+        $libraryModel = new Default_Model_Library();
+
+        $mostLikedMedia = $mediaModel->getMostLikedRecords($limit);
+        $mostLikedLibrary = $libraryModel->getMostLikedRecords($limit);
+
+        return array(
+            'media' => $mostLikedMedia,
+            'library' => $mostLikedLibrary,
+            'limit' => $limit,
+        );
+    }
+
 }
 

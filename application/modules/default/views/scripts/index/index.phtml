@@ -1,140 +1,28 @@
-<div class="sub-content">
-    <?php if (isset($this->mostLiked['media']) && !empty($this->mostLiked['media'])) { ?>
+<?php if (isset($this->mostLiked['media']) && !empty($this->mostLiked['media'])) { ?>
+    <div class="sub-content">
         <h2 class="border-bottom">Media</h2>
         <div class="row-fluid list-items">
             <?php foreach ($this->mostLiked['media'] as $item) { ?>
-                <?php echo $this->partial('media/partial-media.phtml', array('item' => $item)); ?>
+                <div id="media<?php echo $item->id; ?>">
+                    <?php echo $this->partial('media/partial-media.phtml', array('item' => $item)); ?>
+                </div>
             <?php } ?>
         </div>
-    <?php } ?>
-    <div class="row-fluid">
-        <div class="span4 list-item">
-            <div class="row-fluid">
-                <div class="span5 thumb">
-                    <img src="<?php echo $this->getResource('abc.jpg'); ?>" />
+    </div>
+<?php } ?>
+<?php if (isset($this->mostLiked['library']) && !empty($this->mostLiked['library'])) { ?>
+    <div class="sub-content">
+        <h2 class="border-bottom">Library</h2>
+        <div class="list-items">
+            <?php foreach ($this->mostLiked['library'] as $item) { ?>
+                <div id="library<?php echo $item->id; ?>">
+                    <?php echo $this->partial('library/partial-library.phtml', array('item' => $item)); ?>
                 </div>
-                <div class="span7">
-                    <h3 class="no-margin-top">Ya Seen</h3>
-                    <p>Mishary Rashid</p>
-                    <p>12:03</p>
-                    <button class="btn">Play</button>
-                </div>
-            </div>
-        </div>
-        <div class="span4 list-item">
-            <div class="row-fluid">
-                <div class="span5 thumb">
-                    <img src="<?php echo $this->getResource('abc.jpg'); ?>" />
-                </div>
-                <div class="span7">
-                    <h3 class="no-margin-top">Ya Seen</h3>
-                    <p>Mishary Rashid</p>
-                    <p>12:03</p>
-                    <button class="btn">Play</button>
-                </div>
-            </div>
-        </div>
-        <div class="span4 list-item">
-            <div class="row-fluid">
-                <div class="span5 thumb">
-                    <img src="<?php echo $this->getResource('abc.jpg'); ?>" />
-                </div>
-                <div class="span7">
-                    <h3 class="no-margin-top">Ya Seen</h3>
-                    <p>Mishary Rashid</p>
-                    <p>12:03</p>
-                    <button class="btn">Play</button>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
-</div>
-<div class="sub-content">
-    <h2 class="border-bottom">Library</h2>
-    <div class="row-fluid">
-        <div class="span4 list-item">
-            <div class="row-fluid">
-                <div class="span5 thumb">
-                    <img src="<?php echo $this->getResource('abc.jpg'); ?>" />
-                </div>
-                <div class="span7">
-                    <h3 class="no-margin-top">Ya Seen</h3>
-                    <p>Mishary Rashid</p>
-                    <p>12:03</p>
-                    <button class="btn">Play</button>
-                </div>
-            </div>
-        </div>
-        <div class="span4 list-item">
-            <div class="row-fluid">
-                <div class="span5 thumb">
-                    <img src="<?php echo $this->getResource('abc.jpg'); ?>" />
-                </div>
-                <div class="span7">
-                    <h3 class="no-margin-top">Ya Seen</h3>
-                    <p>Mishary Rashid</p>
-                    <p>12:03</p>
-                    <button class="btn">Play</button>
-                </div>
-            </div>
-        </div>
-        <div class="span4 list-item">
-            <div class="row-fluid">
-                <div class="span5 thumb">
-                    <img src="<?php echo $this->getResource('abc.jpg'); ?>" />
-                </div>
-                <div class="span7">
-                    <h3 class="no-margin-top">Ya Seen</h3>
-                    <p>Mishary Rashid</p>
-                    <p>12:03</p>
-                    <button class="btn">Play</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="span4 list-item">
-            <div class="row-fluid">
-                <div class="span5 thumb">
-                    <img src="<?php echo $this->getResource('abc.jpg'); ?>" />
-                </div>
-                <div class="span7">
-                    <h3 class="no-margin-top">Ya Seen</h3>
-                    <p>Mishary Rashid</p>
-                    <p>12:03</p>
-                    <button class="btn">Play</button>
-                </div>
-            </div>
-        </div>
-        <div class="span4 list-item">
-            <div class="row-fluid">
-                <div class="span5 thumb">
-                    <img src="<?php echo $this->getResource('abc.jpg'); ?>" />
-                </div>
-                <div class="span7">
-                    <h3 class="no-margin-top">Ya Seen</h3>
-                    <p>Mishary Rashid</p>
-                    <p>12:03</p>
-                    <button class="btn">Play</button>
-                </div>
-            </div>
-        </div>
-        <div class="span4 list-item">
-            <div class="row-fluid">
-                <div class="span5 thumb">
-                    <img src="<?php echo $this->getResource('abc.jpg'); ?>" />
-                </div>
-                <div class="span7">
-                    <h3 class="no-margin-top">Ya Seen</h3>
-                    <p>Mishary Rashid</p>
-                    <p>12:03</p>
-                    <button class="btn">Play</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="sub-content">
+<?php } ?>
+<?php /*<div class="sub-content">
     <h2 class="border-bottom">Gallery</h2>
     <div id="myCarousel" class="bootstrap-carousel carousel slide">
         <ol class="carousel-indicators">
@@ -188,4 +76,4 @@
         <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
         <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
     </div>
-</div>
+</div>*/?>
