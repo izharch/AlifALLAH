@@ -38,6 +38,11 @@ $(function() {
     if(App.userId != null){
         initApproveButton();
     }
+
+    //js show pdf
+    if($('.js-show-pdf').length > 0){
+        initJsShowPdf();
+    }
 });
 
 function setSidebarMinHeight(){
@@ -112,7 +117,7 @@ function initJPlayer(){
                 var player = $(this);
                 var media = {};
                 media[player.attr('extension')] = player.attr('media');
-                console.log('-----------------------------------------------------------------------------',media);
+
                 player.jPlayer( "setMedia", media);
             }
         });
@@ -288,5 +293,37 @@ function initApproveButton(){
                 window.location.reload();
             }
         });
+    });
+}
+
+function initJsShowPdf(){
+    $('.js-show-pdf').on('click', function(e){
+        e.preventDefault();
+        
+        var $this = $(this),
+        target = $this.parents('.list-item').find('.js-show-pdf-target');
+        
+        if(target.find('object').length > 0){
+            target.find('object').remove();
+            target.hide();
+            $this.html('View');
+            
+            //window.location.hash = '';
+        } else {
+            $('.js-show-pdf-target object').remove();
+            
+            var object = $('<object></object>');
+            object.attr('id', 'pdf-viewer')
+            .attr('data', $this.attr('href'))
+            .attr('type', 'application/pdf')
+            .attr('width', '100%')
+            .attr('height', $(window).height() - $('.main-nav').height())
+            .html('Your browser is unable to show PDF. Please download');
+            
+            target.show().html(object);
+            $this.html('Hide');
+            
+            //window.location.hash = 'pdf-viewer';
+        }
     });
 }

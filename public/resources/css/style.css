@@ -124,12 +124,6 @@ ul.errors + p {
 .margin-top-2 {
     margin-top: 2px;
 }
-.margin-bottom-2 {
-    margin-bottom: 2px;
-}
-.margin-bottom-15 {
-    margin-bottom: 15px;
-}
 .margin-top-5{
     margin-top: 5px;
 }
@@ -138,6 +132,15 @@ ul.errors + p {
 }
 .margin-top-15 {
     margin-top: 15px;
+}
+.margin-top-50 {
+    margin-top: 50px;
+}
+.margin-bottom-2 {
+    margin-bottom: 2px;
+}
+.margin-bottom-15 {
+    margin-bottom: 15px;
 }
 .pull-none {
     float: none !important;
