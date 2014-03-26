@@ -1,6 +1,6 @@
 <?php
 
-class Default_Model_Media extends Application_Model_Abstract
+class Default_Model_Media extends Default_Model_Abstract
 {
 
     protected $_name = 'media';
@@ -11,7 +11,7 @@ class Default_Model_Media extends Application_Model_Abstract
         'thumbnail' => 'uploads/thumbnails/',
     );
 
-    public function getPaginatorAdapter($username = NULL, $sharedStatus = NULL, $filters = array())
+    public function getPaginatorQuery($username = NULL, $sharedStatus = NULL, $filters = array())
     {
         $likeCols = array('likes' => new Zend_Db_Expr('COUNT(l.id)'));
 
@@ -40,8 +40,7 @@ class Default_Model_Media extends Application_Model_Abstract
             }
         }
 
-        return new Zend_Paginator_Adapter_DbTableSelect($select);
+        return $select;
     }
 
 }
-

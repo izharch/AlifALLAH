@@ -18,7 +18,16 @@ class Default_IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        
+        $mediaModel = new Default_Model_Media();
+        $libraryModel = new Default_Model_Library();
+
+        $mostLikedMedia = $mediaModel->getMostLikedRecords();
+        $mostLikedLibrary = $libraryModel->getMostLikedRecords();
+
+        $this->view->mostLiked = array(
+            'media' => $mostLikedMedia,
+            'library' => $mostLikedLibrary,
+        );
     }
 
     public function likeAction()

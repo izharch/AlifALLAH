@@ -48,6 +48,7 @@
             <modelFile modelName="Library"/>
             <modelFile modelName="Likes"/>
             <modelFile modelName="Radio"/>
+            <modelFile modelName="Abstract"/>
           </modelsDirectory>
           <servicesDirectory enabled="false"/>
           <viewsDirectory>
