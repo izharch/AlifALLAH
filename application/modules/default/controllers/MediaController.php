@@ -48,12 +48,19 @@ class Default_MediaController extends Zend_Controller_Action
 
         $mediaModel = new Default_Model_Media();
 
-        $paginator = new Zend_Paginator($mediaModel->getPaginatorAdapter($username, $status));
+        $searchForm = new Default_Form_MediaSearch();
+        $filters = $searchForm->extractFilters($this->_request->getParams());
+
+        $paginatorAdapter = $mediaModel->getPaginatorAdapter($username, $status, $filters);
+
+        $paginator = new Zend_Paginator($paginatorAdapter);
         $paginator->setItemCountPerPage(10);
         $paginator->setPageRange(10);
         $paginator->setCurrentPageNumber($this->getParam('page'));
 
         $this->view->paginator = $paginator;
+        $this->view->searchForm = $searchForm;
+        $this->view->advancedSearch = $this->_request->getParam('advanced');
     }
 
     public function addAction()

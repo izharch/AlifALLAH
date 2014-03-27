@@ -1,49 +1,11 @@
-<?php if($this->paginator->count()) { ?>
-<div class="list-item">
-    <?php foreach ($this->paginator as $item) { ?>
-    <div class="row-fluid list-item">
-        <div class="span2">
-            <div class="row-fluid thumb">
-                <?php if(!empty($item->thumbnail)){ ?>
-                <img src="<?php echo $this->getResource($item->thumbnail, 'thumbnails', 'uploads'); ?>" />
-                <?php } else{ ?>
-                <img src="<?php echo $this->getResource('no-image-140.png'); ?>" />
-                    <?php }?>
-                 
-            </div>
-            <div class="row-fluid margin-top-10">
-                <button class="btn btn-small"><i class="icon-heart"></i>Like</button>
-                <span class="like-count">0</span>
-            </div>
-        </div>
-        <div class="span10">
-            <?php if($this->user() && $item->added_by == $this->user()->id) { ?>
-            <div class="btn-group pull-right">
-                <button data-toggle="dropdown" class="btn btn-small dropdown-toggle">Action <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="<?php echo $this->url(array('controller' => 'library', 'action' => 'edit', 'id' => $item->id), NULL, TRUE); ?>">Edit</a>
-                    </li>
-                    <li>
-                        <a href="#">Share</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->url(array('controller' => 'library', 'action' => 'delete', 'id' => $item->id), NULL, TRUE); ?>">Delete</a>
-                    </li>
-                </ul>
-            </div>
-                <?php } ?>
-            <p class="no-margin-bottom"><?php echo $item->username ; ?></p>
-            <h4 class="no-margin"><?php echo $item->name ?></h4>
-            <p> <?php echo $item->type; ?> <strong>by <?php echo $item->author; ?></strong></p>
-        </div>
+<?php if ($this->paginator->count()) { ?>
+    <div class="list-items">
+        <?php foreach ($this->paginator as $item) { ?>
+            <?php echo $this->partial('library/partial-library.phtml', array('item' => $item)); ?>
+        <?php } ?>
     </div>
-    
-    <?php } ?>
-</div>
     <?php echo $this->paginationControl($this->paginator); ?> 
 <?php } else { ?>
-<div class="tumbleweed"></div>
+    <div class="tumbleweed"></div>
 <?php } ?>
 
-    

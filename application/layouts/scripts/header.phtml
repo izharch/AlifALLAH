@@ -137,27 +137,48 @@
         <!-- Search curtain... -->
         <?php if (!empty($this->searchForm)) { ?>
             <div class="curtain curtain-top-down full-width">
-                <div class="row-fluid">
-                    <div class="span6">bla bla bla</div>
-                    <div class="span6">bla bla bla</div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span6">bla bla bla</div>
-                    <div class="span6">bla bla bla</div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span6">bla bla bla</div>
-                    <div class="span6">bla bla bla</div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span6">bla bla bla</div>
-                    <div class="span6">bla bla bla</div>
-                </div>
+                <form class="margin-top-15">
+                    <?php
+                    $searchElements = $this->searchForm->getElements();
+                    $searchElements = array_values($searchElements);
+                    $searchElementsCount = count($searchElements);
+                    ?>
+                    <?php foreach ($searchElements as $key => $element) { ?>
+                        <?php if ($key % 2 == 0) { ?>
+                            <div class="row-fluid">
+                            <?php } ?>
+                            <div class="span4 <?php echo ($key % 2 == 0 ? 'offset2' : ''); ?>">
+                                <div class="row-fluid">
+                                    <div class="span4">
+                                        <label><?php echo $element->getLabel(); ?></label>
+                                    </div>
+                                    <div class="span8">
+                                        <?php echo $element; ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php if ($key % 2 == 1 || $key + 1 == $searchElementsCount) { ?>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
+                    <div class="row-fluid margin-bottom-15">
+                        <div class="span12 center-aligned">
+                            <input type="hidden" name="advanced" value="true"/>
+                            <input class="btn btn-primary" type="submit" value="Search"/>
+                        </div>
+                    </div>
+                </form>
                 <div class="row-fluid">
                     <div class="span4 offset4 center-aligned">
-                        <div class="ribbon pull-none">
+                        <div class="ribbon pull-none <?php echo ($this->advancedSearch === 'true' ? 'glowing' : ''); ?>">
                             <form class="search-widget display-inline">
-                                <input class="no-margin" type="text" placeholder="Search"/>
+                                <?php
+                                $primary = $this->searchForm->primary;
+                                $primary->setAttrib('class', 'no-margin')
+                                        ->setAttrib('placeholder', 'Search');
+
+                                echo $primary;
+                                ?>
                                 <input type="submit" value="" class="ui-icon ui-icon-search display-inline"/>
                             </form>
                             <span class="curtain-puller cursor-pointer">

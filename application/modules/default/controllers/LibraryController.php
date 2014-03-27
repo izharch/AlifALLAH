@@ -158,7 +158,7 @@ class Default_LibraryController extends Zend_Controller_Action
 
                 $libraryModel->save($data);
 
-                $this->_redirect($this->view->url(array('controller' => 'library', 'user' => $this->_user->username), NULL, FALSE));
+                $this->_redirect($this->view->url(array('controller' => 'library', 'user' => $this->_user->username), NULL, TRUE));
             }
         }
 

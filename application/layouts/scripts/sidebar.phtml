@@ -1,77 +1,29 @@
+<?php
+$mostLiked = $this->getMostLiked();
+?>
 <div class="sidebar span3 ui-tabs ui-widget-content">
-    <div class="sidebar-section ui-widget-content ui-corner-all">
-        <h5 class="sidebar-section-header ui-state-default no-margin-top ui-corner-top">most played</h5>
-        <div class="sidebar-section-content">
-            <div class="jquery-ui-tabs">
-                <ul>
-                    <li><a href="#tabs-1">Al-Quran</a></li>
-                    <li><a href="#tabs-2">Hamd</a></li>
-                    <li><a href="#tabs-3">Naat</a></li>
+    <?php if (!empty($mostLiked['media'])) { ?>
+        <div class="sidebar-section ui-widget-content ui-corner-all">
+            <h5 class="sidebar-section-header ui-state-default no-margin-top ui-corner-top">Most liked media</h5>
+            <div class="sidebar-section-content">
+                <ul class="jquery-ui-menu">
+                    <?php foreach ($mostLiked['media'] as $item) { ?>
+                        <li><a href="<?php echo $this->url(array(), NULL, TRUE); ?>#media<?php echo $item->id; ?>"><?php echo $item->name; ?></a></li>
+                    <?php } ?>
                 </ul>
-                <div id="tabs-1">
-                    <ul class="jquery-ui-menu">
-                        <li><a href="#">Ada</a></li>
-                        <li><a href="#">Ada</a></li>
-                        <li><a href="#">Ada</a></li>
-                    </ul>
-                </div>
-                <div id="tabs-2">
-                    hamd
-                </div>
-                <div id="tabs-3">
-                    naat
-                </div>
             </div>
         </div>
-    </div>
-    <div class="sidebar-section ui-widget-content ui-corner-all">
-        <h5 class="sidebar-section-header ui-state-default no-margin-top ui-corner-top">most played</h5>
-        <div class="sidebar-section-content">
-            <div class="jquery-ui-tabs">
-                <ul>
-                    <li><a href="#tabs-1">Al-Quran</a></li>
-                    <li><a href="#tabs-2">Hamd</a></li>
-                    <li><a href="#tabs-3">Naat</a></li>
+    <?php } ?>
+    <?php if (!empty($mostLiked['library'])) { ?>
+        <div class="sidebar-section ui-widget-content ui-corner-all">
+            <h5 class="sidebar-section-header ui-state-default no-margin-top ui-corner-top">Most liked library</h5>
+            <div class="sidebar-section-content">
+                <ul class="jquery-ui-menu">
+                    <?php foreach ($mostLiked['library'] as $item) { ?>
+                        <li><a href="<?php echo $this->url(array(), NULL, TRUE); ?>#library<?php echo $item->id; ?>"><?php echo $item->name; ?></a></li>
+                    <?php } ?>
                 </ul>
-                <div id="tabs-1">
-                    <ul class="jquery-ui-menu">
-                        <li><a href="#">Ada</a></li>
-                        <li><a href="#">Ada</a></li>
-                        <li><a href="#">Ada</a></li>
-                    </ul>
-                </div>
-                <div id="tabs-2">
-                    hamd
-                </div>
-                <div id="tabs-3">
-                    naat
-                </div>
             </div>
         </div>
-    </div>
-    <div class="sidebar-section ui-widget-content ui-corner-all">
-        <h5 class="sidebar-section-header ui-state-default no-margin-top ui-corner-top">most played</h5>
-        <div class="sidebar-section-content">
-            <div class="jquery-ui-tabs">
-                <ul>
-                    <li><a href="#tabs-1">Al-Quran</a></li>
-                    <li><a href="#tabs-2">Hamd</a></li>
-                    <li><a href="#tabs-3">Naat</a></li>
-                </ul>
-                <div id="tabs-1">
-                    <ul class="jquery-ui-menu">
-                        <li><a href="#">Ada</a></li>
-                        <li><a href="#">Ada</a></li>
-                        <li><a href="#">Ada</a></li>
-                    </ul>
-                </div>
-                <div id="tabs-2">
-                    hamd
-                </div>
-                <div id="tabs-3">
-                    naat
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php } ?>
 </div>

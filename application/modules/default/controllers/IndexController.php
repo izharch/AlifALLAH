@@ -18,7 +18,11 @@ class Default_IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        
+        $commonFunctions = new Application_Model_Common();
+
+        $mostLiked = $commonFunctions->getMostLiked();
+
+        $this->view->mostLiked = $mostLiked;
     }
 
     public function likeAction()
