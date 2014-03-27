@@ -16,11 +16,25 @@ $mostLiked = $this->getMostLiked();
     <?php } ?>
     <?php if (!empty($mostLiked['library'])) { ?>
         <div class="sidebar-section ui-widget-content ui-corner-all">
-            <h5 class="sidebar-section-header ui-state-default no-margin-top ui-corner-top">Most liked library</h5>
+            <h5 class="sidebar-section-header ui-state-default no-margin-top ui-corner-top">Most liked literature</h5>
             <div class="sidebar-section-content">
                 <ul class="jquery-ui-menu">
                     <?php foreach ($mostLiked['library'] as $item) { ?>
                         <li><a href="<?php echo $this->url(array(), NULL, TRUE); ?>#library<?php echo $item->id; ?>"><?php echo $item->name; ?></a></li>
+                    <?php } ?>
+                </ul>
+            </div>
+        </div>
+    <?php } ?>
+    <?php if (!empty($mostLiked['gallery'])) { ?>
+        <div class="sidebar-section ui-widget-content ui-corner-all">
+            <h5 class="sidebar-section-header ui-state-default no-margin-top ui-corner-top">Most liked photos</h5>
+            <div class="sidebar-section-content">
+                <ul class="jquery-ui-menu">
+                    <?php foreach ($mostLiked['gallery'] as $index => $item) { ?>
+                        <li data-target="#myCarousel" data-slide-to="<?php echo $index ?>">
+                            <a href="#myCarousel"><?php echo $item->name; ?></a>
+                        </li>
                     <?php } ?>
                 </ul>
             </div>

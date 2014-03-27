@@ -5,7 +5,7 @@ $item = $this->item;
     <div class="span2">
         <div class="row-fluid thumb">
             <?php if (!empty($item->thumbnail)) { ?>
-                <img src="<?php echo $this->getResource($item->thumbnail, 'thumbnails', 'uploads'); ?>" />
+                <img src="<?php echo $this->timthumb($this->getResource($item->thumbnail, 'thumbnails', 'uploads'), 140, 140, 2); ?>" />
             <?php } else { ?>
                 <img src="<?php echo $this->getResource('no-image-140.png'); ?>" />    
             <?php } ?>

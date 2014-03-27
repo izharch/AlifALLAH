@@ -28,7 +28,7 @@
         <?php
         echo $this->headScript()
                 //jQuery
-                ->appendFile($this->baseUrl() . '/resources/js/jquery-1.10.2.min.js')
+                ->prependFile($this->baseUrl() . '/resources/js/jquery-1.10.2.min.js')
                 ->appendFile($this->baseUrl() . '/resources/js/jquery-migrate-1.2.1.min.js')
                 ->appendFile($this->baseUrl() . '/resources/js/jquery-ui-1.10.4.custom.min.js')
                 //Bootsrtap

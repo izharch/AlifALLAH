@@ -12,17 +12,18 @@ class Default_GalleryController extends Zend_Controller_Action
         $actionName = $this->_request->getActionName();
 
         if (!isset($this->_user->id) && in_array($actionName, array('add', 'edit', 'delete'))) {
-            $this->_redirect($this->view->url(array('module' => 'user', 'action' => 'login')), NULL, TRUE);
+            $this->_redirect($this->view->url(array('module' => 'user', 'action' => 'login'), NULL, TRUE));
         }
 
         //Send nav selection information to view
-        $userName = $this->_request->getParam('user', NULL);
-        if ($userName != NULL) {
+        $username = $this->_request->getParam('user', NULL);
+        if ($username != NULL) {
             //some user's nav
             $this->view->userNav = TRUE;
-            $this->view->username = $userName;
+            $this->view->username = $username;
 
-            if (isset($this->_user->username) && $this->_user->username === $userName) {
+            if (isset($this->_user->username) && $this->_user->username === $username) {
+                //Logged in user's nav
                 $this->view->ownNav = TRUE;
             }
         }
@@ -35,23 +36,31 @@ class Default_GalleryController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $userName = $this->_request->getParam('user', NULL);
+        $username = $this->_request->getParam('user', NULL);
         $status = $this->_request->getParam('status', NULL);
 
-        if (empty($userName) && empty($status)) {
+        if (empty($username) && empty($status)) {
+            //Show only shared items
             $status = 'shared';
-        } elseif ($status == 'pending') {
+        } else if ($status == 'pending') {
             $this->view->pending = TRUE;
         }
 
         $galleryModel = new Default_Model_Gallery();
+        
+        $searchForm = new Default_Form_GallerySearch();
+        $filters = $searchForm->extractFilters($this->_request->getParams());
 
-        $paginator = new Zend_Paginator($galleryModel->getPaginatorAdapter($userName, $status));
+        $paginatorAdapter = $galleryModel->getPaginatorAdapter($username, $status, $filters);
+
+        $paginator = new Zend_Paginator($paginatorAdapter);
         $paginator->setItemCountPerPage(10);
         $paginator->setPageRange(10);
         $paginator->setCurrentPageNumber($this->getParam('page'));
 
         $this->view->paginator = $paginator;
+        $this->view->searchForm = $searchForm;
+        $this->view->advancedSearch = $this->_request->getParam('advanced');
     }
 
     public function addAction()
@@ -62,7 +71,6 @@ class Default_GalleryController extends Zend_Controller_Action
     public function editAction()
     {
         $id = $this->_request->getParam('id');
-
         if (empty($id)) {
             $this->view->error = 400;
             return;
@@ -76,6 +84,7 @@ class Default_GalleryController extends Zend_Controller_Action
 
         if (empty($id)) {
             $this->view->error = 400;
+            return;
         }
 
         $galleryModel = new Default_Model_Gallery();
@@ -85,7 +94,7 @@ class Default_GalleryController extends Zend_Controller_Action
         if (!isset($gallery->id)) {
             $this->view->error = 404;
             return;
-        } elseif ($gallery->added_by != $this->_user->id) {
+        } else if ($gallery->added_by != $this->_user->id) {
             $this->view->error = 403;
             return;
         }
@@ -115,8 +124,9 @@ class Default_GalleryController extends Zend_Controller_Action
             if (!isset($gallery->id)) {
                 $this->view->error = 404;
                 return;
-            } elseif ($gallery->added_by != $this->_user->id) {
+            } else if ($gallery->added_by != $this->_user->id) {
                 $this->view->error = 403;
+                return;
             }
 
             //Populate form

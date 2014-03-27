@@ -43,6 +43,11 @@ $(function() {
     if($('.js-show-pdf').length > 0){
         initJsShowPdf();
     }
+    
+    //js colorbox
+    if($('.js-colorbox').length > 0){
+        initJsColorbox();
+    }
 });
 
 function setSidebarMinHeight(){
@@ -308,7 +313,7 @@ function initJsShowPdf(){
             target.hide();
             $this.html('View');
             
-            //window.location.hash = '';
+        //window.location.hash = '';
         } else {
             $('.js-show-pdf-target object').remove();
             
@@ -323,7 +328,11 @@ function initJsShowPdf(){
             target.show().html(object);
             $this.html('Hide');
             
-            //window.location.hash = 'pdf-viewer';
+        //window.location.hash = 'pdf-viewer';
         }
     });
+}
+
+function initJsColorbox(){
+    $('.js-colorbox').colorbox();
 }

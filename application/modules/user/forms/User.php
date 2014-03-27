@@ -5,8 +5,8 @@ class User_Form_User extends Zend_Form
 
     public function init()
     {
-        $userName = new Zend_Form_Element_Text('username');
-        $userName->setLabel('Username')
+        $username = new Zend_Form_Element_Text('username');
+        $username->setLabel('Username')
                 ->setRequired(TRUE)
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
@@ -19,7 +19,7 @@ class User_Form_User extends Zend_Form
                 ->addFilter('StringTrim')
                 ->setDecorators(array('ViewHelper', 'Errors'));
 
-        $this->addElements(array($userName, $password));
+        $this->addElements(array($username, $password));
     }
 
 }

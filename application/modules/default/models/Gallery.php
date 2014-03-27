@@ -1,6 +1,6 @@
 <?php
 
-class Default_Model_Gallery extends Application_Model_Abstract
+class Default_Model_Gallery extends Default_Model_Abstract
 {
 
     protected $_name = 'gallery';
@@ -8,7 +8,7 @@ class Default_Model_Gallery extends Application_Model_Abstract
     /* See Application_Model_Abstract::$uploadedFiles */
     protected $uploadFiles = array('file' => 'uploads/gallery');
 
-    public function getPaginatorAdapter($username = NULL, $shareStatus = NULL)
+    public function getPaginatorQuery($username = NULL, $shareStatus = NULL, $filters = array())
     {
         $likeCols = array('likes' => new Zend_Db_Expr('COUNT(l.id)'));
 
@@ -31,8 +31,13 @@ class Default_Model_Gallery extends Application_Model_Abstract
         if (!empty($shareStatus)) {
             $select->where('gl.share_status = ?', $shareStatus);
         }
+        if (!empty($filters)) {
+            foreach ($filters as $key => $value) {
+                $select->where("$key LIKE ?", "%$value%");
+            }
+        }
 
-        return new Zend_Paginator_Adapter_DbTableSelect($select);
+        return $select;
     }
 
 }

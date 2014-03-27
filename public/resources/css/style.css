@@ -142,11 +142,17 @@ ul.errors + p {
 .margin-bottom-15 {
     margin-bottom: 15px;
 }
+.padding-all-5 {
+    padding: 5px;
+}
 .pull-none {
     float: none !important;
 }
 .border-bottom {
     border-bottom: 1px solid #CDC3B7;
+}
+.border-all {
+    border: 1px solid #CCCCCC !important;
 }
 h2.border-bottom {
     padding-bottom: 10px;
@@ -413,7 +419,8 @@ h2.border-bottom {
 /* ...search widget */
 
 .content .list-item {
-    margin: 10px 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border-bottom: 1px solid #DDDDDD;
     padding-bottom: 10px;
 }

@@ -12,8 +12,8 @@ class User_Form_Signup extends Zend_Form
                 ->addFilter('StringTrim')
                 ->setDecorators(array('ViewHelper', 'Errors'));
 
-        $userName = new Zend_Form_Element_Text('username');
-        $userName->setLabel('Username')
+        $username = new Zend_Form_Element_Text('username');
+        $username->setLabel('Username')
                 ->setRequired(TRUE)
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
@@ -33,7 +33,7 @@ class User_Form_Signup extends Zend_Form
                 ->addFilter('StringTrim')
                 ->setDecorators(array('ViewHelper', 'Errors'));
 
-        $this->addElements(array($email, $userName, $password, $confirmPassword));
+        $this->addElements(array($email, $username, $password, $confirmPassword));
      
     }   
         public function isValid($data)
