@@ -1,0 +1,49 @@
+<?php if ($this->paginator->count()) { ?>
+    <div class="list-items">
+        <?php foreach ($this->paginator as $item) { ?>
+            <div class="row-fluid list-item">
+                <div class="span2">
+                    <div class="row-fluid thumb">
+                        <?php if (!empty($item->file)) { ?>
+                            <img src="<?php echo $this->getResource($item->file, 'gallery', 'uploads'); ?>" />
+                        <?php } else { ?>
+                            <img src="<?php echo $this->getResource('no-image-140.png'); ?>" />
+                        <?php } ?>
+                    </div>
+                    <div class="row-fluid margin-top-10">
+                        <?php $this->likebutton($item); ?>
+                    </div>
+                    <div class="row-fluid margin-top-5">
+                        <?php $this->sharebutton($item); ?>
+                    </div>
+                </div>
+                <div class="span10">
+                    <?php if ($this->isAdmin || $this->user() && $item->added_by == $this->user()->id) { ?>
+                        <div class="btn-group pull-right">
+                            <button data-toggle="dropdown" class="btn btn-small drop-toggle">Action<span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="<?php echo $this->url(array('controller' => 'gallery', 'action' => 'edit', 'id' => $item->id), NULL, TRUE); ?>">Edit</a> 
+                                </li>
+                                <?php
+                                if ($this->pending === TRUE) {
+                                    $this->shareOption($item);
+                                }
+                                ?>
+                                <li>
+                                    <a href="<?php echo $this->url(array('controller' => 'gallery', 'action' => 'delete', 'id' => $item->id), NULL, TRUE) ?>">Delete</a>
+                                </li>
+                            </ul>
+                        </div>
+                    <?php } ?>
+                    <p class="no-margin-bottom"><?php echo $item->username; ?></p>
+                    <h4 class="no-margin"><?php echo $item->name; ?></h4>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+    <?php echo $this->paginationControl($this->paginator); ?>
+<?php } else { ?>
+    <div class="tumbleweed"></div>
+<?php } ?>
+

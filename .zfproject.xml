@@ -21,6 +21,7 @@
       <modelsDirectory>
         <modelFile modelName="Abstract"/>
         <modelFile modelName="Common"/>
+        <modelFile modelName="Allaery"/>
       </modelsDirectory>
       <modulesDirectory>
         <moduleDirectory moduleName="default">
@@ -32,10 +33,17 @@
             <controllerFile controllerName="Radio">
               <actionMethod actionName="index"/>
             </controllerFile>
+            <controllerFile controllerName="GallaryController">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Gallary">
+              <actionMethod actionName="index"/>
+            </controllerFile>
           </controllersDirectory>
           <formsDirectory>
             <formFile formName="Media"/>
             <formFile formName="Radio"/>
+            <formFile formName="Gallary"/>
           </formsDirectory>
           <layoutsDirectory enabled="false"/>
           <modelsDirectory>
@@ -44,6 +52,7 @@
             <modelFile modelName="Library"/>
             <modelFile modelName="Likes"/>
             <modelFile modelName="Radio"/>
+            <modelFile modelName="Gallary"/>
           </modelsDirectory>
           <servicesDirectory enabled="false"/>
           <viewsDirectory>
@@ -53,6 +62,27 @@
               </viewControllerScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Radio">
                 <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="GallaryController">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Gallary">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="GallaryController">
+                <viewScriptFile forActionName="addAction"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Gallary">
+                <viewScriptFile forActionName="add"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Gallary">
+                <viewScriptFile forActionName="edit"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Gallary">
+                <viewScriptFile forActionName="delete"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Gallary">
+                <viewScriptFile forActionName="form"/>
               </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
             <viewHelpersDirectory/>
