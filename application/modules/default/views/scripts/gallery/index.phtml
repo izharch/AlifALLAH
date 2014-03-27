@@ -22,12 +22,12 @@ $listCount = $this->paginator->getCurrentItemCount();
                         <?php } ?>
                     </div>
                     <div class="row-fluid margin-top-10">
-                        <?php if ($this->isAdmin || $this->user() && $item->added_by == $this->user()->id) { ?>
+                        <?php if ($this->isAdmin() || $this->user() && $item->added_by == $this->user()->id) { ?>
                             <div class="btn-group pull-right">
                                 <button data-toggle="dropdown" class="btn btn-small drop-toggle">Action<span class="caret"></span></button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="<?php echo $this->url(array('controller' => 'gallery', 'action' => 'edit', 'id' => $item->id), NULL, TRUE); ?>">Edit</a> 
+                                        <a href="<?php echo $this->url(array('controller' => 'gallery', 'action' => 'edit', 'id' => $item->id, 'pending' => $this->pending, 'shared' => $this->shared), NULL, TRUE); ?>">Edit</a> 
                                     </li>
                                     <?php
                                     if ($this->pending === TRUE) {
@@ -35,7 +35,7 @@ $listCount = $this->paginator->getCurrentItemCount();
                                     }
                                     ?>
                                     <li>
-                                        <a href="<?php echo $this->url(array('controller' => 'gallery', 'action' => 'delete', 'id' => $item->id), NULL, TRUE) ?>">Delete</a>
+                                        <a href="<?php echo $this->url(array('controller' => 'gallery', 'action' => 'delete', 'id' => $item->id, 'pending' => $this->pending, 'shared' => $this->shared), NULL, TRUE) ?>">Delete</a>
                                     </li>
                                 </ul>
                             </div>

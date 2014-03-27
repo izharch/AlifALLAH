@@ -18,13 +18,13 @@ class Application_Model_Common
      * 
      * @return string the value of shared status to be saved in db
      */
-    public function resolveShareStatus($shareStatus)
+    public function resolveShareStatus($shareStatus, $pendingFlag = 0)
     {
         if ($shareStatus === 'shared') {
             $user = Zend_Auth::getInstance()->getIdentity();
 
             if (isset($user->roles) && !empty($user->roles)) {
-                return 'shared';
+                return $pendingFlag == 1 ? 'pending' : 'shared';
             } else {
                 return 'pending';
             }
@@ -113,13 +113,16 @@ TEXT;
     {
         $mediaModel = new Default_Model_Media();
         $libraryModel = new Default_Model_Library();
+        $galleryModel = new Default_Model_Gallery();
 
         $mostLikedMedia = $mediaModel->getMostLikedRecords($limit);
         $mostLikedLibrary = $libraryModel->getMostLikedRecords($limit);
+        $mostLikedGallery = $galleryModel->getMostLikedRecords($limit);
 
         return array(
             'media' => $mostLikedMedia,
             'library' => $mostLikedLibrary,
+            'gallery' => $mostLikedGallery,
             'limit' => $limit,
         );
     }

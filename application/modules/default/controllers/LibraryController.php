@@ -42,6 +42,7 @@ class Default_LibraryController extends Zend_Controller_Action
         if (empty($username) && empty($status)) {
             //Show only shared items
             $status = 'shared';
+            $this->view->shared = TRUE;
         } else if ($status == 'pending') {
             $this->view->pending = TRUE;
         }
@@ -117,6 +118,8 @@ class Default_LibraryController extends Zend_Controller_Action
 
         //Update...
         $id = $this->_request->getParam('id');
+        $pending = $this->_request->getParam('pending');
+        $shared = $this->_request->getParam('shared');
 
         if (!empty($id)) {
             $library = $libraryModel->getRecordById($id);
@@ -124,13 +127,14 @@ class Default_LibraryController extends Zend_Controller_Action
             if (!isset($library->id)) {
                 $this->view->error = 404;
                 return;
-            } else if ($library->added_by != $this->_user->id) {
+            } else if (!$this->view->isAdmin() && $library->added_by != $this->_user->id) {
                 $this->view->error = 403;
                 return;
             }
 
             //Populate form
-            $form->populate($library->toArray());
+            $form->prepareForEdit()
+                    ->populate($library->toArray());
 
             $this->view->file = $library->file;
             $this->view->thumbnail = $library->thumbnail;
@@ -157,15 +161,24 @@ class Default_LibraryController extends Zend_Controller_Action
                     }
                 }
                 //...Update
-                //Added / updated data
-                $data['added_at'] = date('Y-m-d H:i:s');
-                $data['added_by'] = $this->_user->id;
+                if (empty($id)) {
+                    //Added / updated data
+                    $data['added_at'] = date('Y-m-d H:i:s');
+                    $data['added_by'] = $this->_user->id;
+                }
 
-                $data['share_status'] = $commonModel->resolveShareStatus($data['share_status']);
+                $data['share_status'] = $commonModel->resolveShareStatus($data['share_status'], $pending);
 
                 $libraryModel->save($data);
 
-                $this->_redirect($this->view->url(array('controller' => 'library', 'user' => $this->_user->username), NULL, TRUE));
+                if ($pending == 1) {
+                    $redirectKey = 'status';
+                    $redirectVal = 'pending';
+                } else if ($shared != 1) {
+                    $redirectKey = 'user';
+                    $redirectVal = $this->_user->username;
+                }
+                $this->_redirect($this->view->url(array('controller' => 'library', $redirectKey => $redirectVal), NULL, TRUE));
             }
         }
 

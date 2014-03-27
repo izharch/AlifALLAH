@@ -23,7 +23,7 @@ $item = $this->item;
                 <button data-toggle="dropdown" class="btn btn-small dropdown-toggle">Action <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'edit', 'id' => $item->id), NULL, TRUE); ?>">Edit</a>
+                        <a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'edit', 'id' => $item->id, 'pending' => $this->pending, 'shared' => $this->shared), NULL, TRUE); ?>">Edit</a>
                     </li>
                     <?php
                     if ($this->pending === TRUE) {
@@ -31,7 +31,7 @@ $item = $this->item;
                     }
                     ?>
                     <li>
-                        <a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'delete', 'id' => $item->id), NULL, TRUE); ?>">Delete</a>
+                        <a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'delete', 'id' => $item->id, 'pending' => $this->pending, 'shared' => $this->shared), NULL, TRUE); ?>">Delete</a>
                     </li>
                 </ul>
             </div>

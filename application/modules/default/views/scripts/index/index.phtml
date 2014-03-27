@@ -1,4 +1,4 @@
-<?php if (isset($this->mostLiked['media']) && !empty($this->mostLiked['media'])) { ?>
+<?php if ($this->mostLiked['media']->count()) { ?>
     <div class="sub-content">
         <h2 class="border-bottom">Media</h2>
         <div class="row-fluid list-items">
@@ -10,7 +10,7 @@
         </div>
     </div>
 <?php } ?>
-<?php if (isset($this->mostLiked['library']) && !empty($this->mostLiked['library'])) { ?>
+<?php if ($this->mostLiked['library']->count()) { ?>
     <div class="sub-content">
         <h2 class="border-bottom">Library</h2>
         <div class="list-items">
@@ -22,7 +22,7 @@
         </div>
     </div>
 <?php } ?>
-<?php if (isset($this->mostLiked['gallery']) && !empty($this->mostLiked['gallery'])) { ?>
+<?php if ($this->mostLiked['gallery']->count()) { ?>
     <div class="sub-content">
         <h2 class="border-bottom">Gallery</h2>
         <div id="myCarousel" class="bootstrap-carousel carousel slide">
@@ -33,9 +33,9 @@
             </ol>
             <!-- Carousel items -->
             <div class="carousel-inner">
-                <?php foreach ($this->mostLiked['gallery'] as $item) { ?>
-                    <div class="active item">
-                        <img src="<?php echo $this->getResource($item->file, 'gallery', 'uploads'); ?>" />
+                <?php foreach ($this->mostLiked['gallery'] as $index => $item) { ?>
+                    <div class="<?php echo ($index == 0 ? 'active' : ''); ?> item center-aligned">
+                        <img class="display-inline-block" src="<?php echo $this->getResource($item->file, 'gallery', 'uploads'); ?>" />
                     </div>
                 <?php } ?>
                 <!--<div class="item">

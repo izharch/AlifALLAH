@@ -41,6 +41,7 @@
             <formFile formName="MediaSearch"/>
             <formFile formName="AbstractSearch"/>
             <formFile formName="LibrarySearch"/>
+            <formFile formName="Abstract"/>
           </formsDirectory>
           <layoutsDirectory enabled="false"/>
           <modelsDirectory>

@@ -1,6 +1,6 @@
 <?php
 
-class Default_Form_Library extends Zend_Form
+class Default_Form_Library extends Default_Form_Abstract
 {
 
     public function init()

@@ -1,2 +1,5 @@
-<h3>Edit Images</h3>
-<?php echo $this->render('gallery/form.phtml'); ?>
+<h3>Edit Image</h3>
+<?php
+if (!empty($this->form)) {
+    echo $this->render('gallery/form.phtml');
+}

@@ -1,7 +1,7 @@
 <?php if ($this->paginator->count()) { ?>
     <div class="list-items">
         <?php foreach ($this->paginator as $item) { ?>
-            <?php echo $this->partial('library/partial-library.phtml', array('item' => $item)); ?>
+            <?php echo $this->partial('library/partial-library.phtml', array('item' => $item, 'pending' => $this->pending, 'shared' => $this->shared)); ?>
         <?php } ?>
     </div>
     <?php echo $this->paginationControl($this->paginator); ?> 

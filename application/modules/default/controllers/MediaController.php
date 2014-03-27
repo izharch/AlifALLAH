@@ -42,6 +42,7 @@ class Default_MediaController extends Zend_Controller_Action
         if (empty($username) && empty($status)) {
             //Show only shared items
             $status = 'shared';
+            $this->view->shared = TRUE;
         } else if ($status == 'pending') {
             $this->view->pending = TRUE;
         }
@@ -117,6 +118,8 @@ class Default_MediaController extends Zend_Controller_Action
 
         //Update...
         $id = $this->_request->getParam('id');
+        $pending = $this->_request->getParam('pending');
+        $shared = $this->_request->getParam('shared');
 
         if (!empty($id)) {
             $media = $mediaModel->getRecordById($id);
@@ -124,13 +127,14 @@ class Default_MediaController extends Zend_Controller_Action
             if (!isset($media->id)) {
                 $this->view->error = 404;
                 return;
-            } else if ($media->added_by != $this->_user->id) {
+            } else if (!$this->view->isAdmin() && $media->added_by != $this->_user->id) {
                 $this->view->error = 403;
                 return;
             }
 
             //Populate form
-            $form->populate($media->toArray());
+            $form->prepareForEdit()
+                    ->populate($media->toArray());
 
             $this->view->file = $media->file;
             $this->view->thumbnail = $media->thumbnail;
@@ -157,15 +161,24 @@ class Default_MediaController extends Zend_Controller_Action
                     }
                 }
                 //...Update
-                //Added / updated date
-                $data['added_at'] = date('Y-m-d H:i:s');
-                $data['added_by'] = $this->_user->id;
+                if (empty($id)) {
+                    //Added / updated date
+                    $data['added_at'] = date('Y-m-d H:i:s');
+                    $data['added_by'] = $this->_user->id;
+                }
 
-                $data['share_status'] = $commonModel->resolveShareStatus($data['share_status']);
+                $data['share_status'] = $commonModel->resolveShareStatus($data['share_status'], $pending);
 
                 $mediaModel->save($data);
 
-                $this->_redirect($this->view->url(array('controller' => 'media', 'user' => $this->_user->username), NULL, TRUE));
+                if ($pending == 1) {
+                    $redirectKey = 'status';
+                    $redirectVal = 'pending';
+                } else if ($shared != 1) {
+                    $redirectKey = 'user';
+                    $redirectVal = $this->_user->username;
+                }
+                $this->_redirect($this->view->url(array('controller' => 'media', $redirectKey => $redirectVal), NULL, TRUE));
             }
         }
 

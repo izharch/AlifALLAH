@@ -1,2 +1,5 @@
 <h3>Add Media</h3>
-<?php echo $this->render('media/form.phtml'); ?>
+<?php
+if (!empty($this->form)) {
+    echo $this->render('media/form.phtml');
+}

@@ -1,2 +1,5 @@
 <h3>Edit Library</h3>
-<?php echo $this->render('library/form.phtml'); ?>
+<?php
+if (!empty($this->form)) {
+    echo $this->render('library/form.phtml');
+}

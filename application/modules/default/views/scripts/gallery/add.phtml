@@ -1,2 +1,5 @@
-<h3>Add Images</h3>
-<?php echo $this->render('gallery/form.phtml'); ?>
+<h3>Add Image</h3>
+<?php
+if (!empty($this->form)) {
+    echo $this->render('gallery/form.phtml');
+}

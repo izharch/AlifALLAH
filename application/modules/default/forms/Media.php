@@ -1,6 +1,6 @@
 <?php
 
-class Default_Form_Media extends Zend_Form
+class Default_Form_Media extends Default_Form_Abstract
 {
 
     public function init()
@@ -64,11 +64,6 @@ class Default_Form_Media extends Zend_Form
                 ->setDecorators(array('File', 'Errors'));
 
         $this->addElements(array($name, $type, $artist, $sharedStatus, $file, $thumbnail));
-    }
-
-    public function prepareForEdit()
-    {
-        $this->getElement('file')->setRequired(FALSE);
     }
 
 }
