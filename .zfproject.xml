@@ -40,6 +40,7 @@
             <formFile formName="Radio"/>
             <formFile formName="MediaSearch"/>
             <formFile formName="AbstractSearch"/>
+            <formFile formName="LibrarySearch"/>
           </formsDirectory>
           <layoutsDirectory enabled="false"/>
           <modelsDirectory>

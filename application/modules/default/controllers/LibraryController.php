@@ -48,12 +48,19 @@ class Default_LibraryController extends Zend_Controller_Action
 
         $libraryModel = new Default_Model_Library();
 
-        $paginator = new Zend_Paginator($libraryModel->getPaginatorAdapter($username, $status));
+        $searchForm = new Default_Form_LibrarySearch();
+        $filters = $searchForm->extractFilters($this->_request->getParams());
+
+        $paginatorAdapter = $libraryModel->getPaginatorAdapter($username, $status, $filters);
+
+        $paginator = new Zend_Paginator($paginatorAdapter);
         $paginator->setItemCountPerPage(10);
         $paginator->setPageRange(10);
         $paginator->setCurrentPageNumber($this->getParam('page'));
 
         $this->view->paginator = $paginator;
+        $this->view->searchForm = $searchForm;
+        $this->view->advancedSearch = $this->_request->getParams('advanced');
     }
 
     public function addAction()

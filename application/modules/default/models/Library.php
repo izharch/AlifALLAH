@@ -12,7 +12,7 @@ class Default_Model_Library extends Default_Model_Abstract
     );
 
     public function getPaginatorQuery($username = NULL, $sharedStatus = NULL, $filters = array())
-    { 
+    {
         $likeCols = array('likes' => new Zend_Db_Expr('COUNT(l.id)'));
 
         $user = Zend_Auth::getInstance()->getIdentity();
@@ -33,6 +33,11 @@ class Default_Model_Library extends Default_Model_Abstract
         }
         if (!empty($sharedStatus)) {
             $select->where('lb.share_status = ?', $sharedStatus);
+        }
+        if (!empty($filters)) {
+            foreach ($filters as $key => $value) {
+                $select->where("$key LIKE ?", "%$value%");
+            }
         }
 
         return $select;
