@@ -7,7 +7,7 @@
 /**
  * Description of Messages
  *
- * @author Muhammad Adeel Nawaz
+ * @author Muhammad izhar
  */
 class Application_View_Helper_Messages extends Zend_View_Helper_Abstract
 {
