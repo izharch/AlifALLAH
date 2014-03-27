@@ -17,7 +17,7 @@ abstract class Default_Model_Abstract extends Application_Model_Abstract
      */
     public function getPaginatorAdapter($username = NULL, $sharedStatus = NULL, $filters = array())
     {
-        $select = $this->getPaginatorQuery();
+        $select = $this->getPaginatorQuery($username, $sharedStatus, $filters);
 
         return new Zend_Paginator_Adapter_DbTableSelect($select);
     }
@@ -35,7 +35,8 @@ abstract class Default_Model_Abstract extends Application_Model_Abstract
 
         $select->reset(Zend_Db_Table_Select::ORDER)
                 ->order($order)
-                ->limit($limit);
+                ->limit($limit)
+                ->having('likes > ?', 0);
 
         return $this->fetchAll($select);
     }
