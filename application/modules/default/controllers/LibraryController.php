@@ -95,7 +95,7 @@ class Default_LibraryController extends Zend_Controller_Action
         if (!isset($library->id)) {
             $this->view->error = 404;
             return;
-        } elseif ($library->added_by != $this->_user->id) {
+        } elseif (!$this->view->isAdmin() && $library->added_by != $this->_user->id) {
             $this->view->error = 403;
             return;
         }

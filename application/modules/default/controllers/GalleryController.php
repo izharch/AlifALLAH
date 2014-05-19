@@ -95,7 +95,7 @@ class Default_GalleryController extends Zend_Controller_Action
         if (!isset($gallery->id)) {
             $this->view->error = 404;
             return;
-        } else if ($gallery->added_by != $this->_user->id) {
+        } else if (!$this->view->isAdmin() && $gallery->added_by != $this->_user->id) {
             $this->view->error = 403;
             return;
         }

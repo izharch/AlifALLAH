@@ -95,7 +95,7 @@ class Default_MediaController extends Zend_Controller_Action
         if (!isset($media->id)) {
             $this->view->error = 404;
             return;
-        } else if ($media->added_by != $this->_user->id) {
+        } else if (!$this->view->isAdmin() && $media->added_by != $this->_user->id) {
             $this->view->error = 403;
             return;
         }
